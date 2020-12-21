@@ -1,18 +1,15 @@
 package com.getmontir.customer.di
 
-import com.getmontir.customer.data.network.APIService
-import com.getmontir.customer.data.repository.VersionRepository
-import com.getmontir.customer.presentation.ui.main.SplashViewModel
+import com.getmontir.customer.viewmodel.SplashViewModel
+import com.getmontir.lib.di.remoteModule
+import com.getmontir.lib.di.repositoryModule
+import com.getmontir.lib.presentation.utils.SessionManager
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val remoteModule = module {
-    single { APIService.createService() }
-}
-
-val repositoryModule = module {
-    factory { VersionRepository( androidContext(), get() ) }
+val commonModule = module {
+    single { SessionManager(androidContext(), "getMontirCustomerPref") }
 }
 
 val viewModelModule = module {
@@ -20,6 +17,7 @@ val viewModelModule = module {
 }
 
 val appModules = listOf(
+    commonModule,
     remoteModule,
     repositoryModule,
     viewModelModule

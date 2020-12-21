@@ -1,4 +1,4 @@
-package com.getmontir.customer.presentation.ui.main
+package com.getmontir.customer.ui.splash
 
 import com.getmontir.customer.BuildConfig
 import android.os.Bundle
@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.getmontir.customer.R
+import com.getmontir.customer.viewmodel.SplashViewModel
+import com.getmontir.lib.presentation.fragment.BaseFragment
 import kotlinx.coroutines.InternalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class SplashFragment : Fragment() {
+class SplashFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = SplashFragment()
@@ -30,10 +32,15 @@ class SplashFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.customerVersion.observe( viewLifecycleOwner, {
-            Timber.tag("ASU").d(it.toString())
+            processData("version", it)
         })
 
         viewModel.loadCustomerVersion( BuildConfig.VERSION_CODE )
     }
 
+    override fun processResult(tag: String, data: Any?) {
+        super.processResult(tag, data)
+        val d = data as Boolean
+        if( tag == "version") Timber.tag("ASU").d(d.toString())
+    }
 }

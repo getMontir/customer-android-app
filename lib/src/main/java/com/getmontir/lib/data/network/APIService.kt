@@ -1,8 +1,11 @@
-package com.getmontir.customer.data.network
+package com.getmontir.lib.data.network
 
-import com.getmontir.customer.data.response.ApiResponse
-import com.getmontir.customer.BuildConfig
-import com.getmontir.customer.data.ext.bodyToString
+import android.content.Context
+import com.getmontir.lib.data.response.ApiResponse
+import com.getmontir.lib.BuildConfig
+import com.getmontir.lib.ext.bodyToString
+import com.getmontir.lib.data.network.interceptor.NetworkConnectionInterceptor
+import com.getmontir.lib.presentation.utils.SessionManager
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -12,7 +15,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
 import retrofit2.http.POST
 import timber.log.Timber
 import java.util.*
@@ -36,7 +38,7 @@ interface APIService {
         private const val debugURL = "http://getmontir.paperplane.id/api/"
         private const val releaseURL = "https://api.getmontir.com/api/"
 
-        fun createService( /*sessionManager: SessionManager*/): APIService {
+        fun createService( context: Context, sessionManager: SessionManager): APIService {
             val baseURL = if( BuildConfig.DEBUG ) debugURL else releaseURL
             val appToken = "bCtgjoy3gGQHAdoyzFbduGhAGr5hQND5Fbt7ggMWNgi10_dcPBmr9cHc5tK9v"
             val cacheTime = 432000
@@ -49,6 +51,7 @@ interface APIService {
                 .connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(15, TimeUnit.SECONDS)
+                .addInterceptor(NetworkConnectionInterceptor(context))
                 .addInterceptor(interceptor)
                 .addInterceptor { chain ->
                     val newRequest = chain.request()

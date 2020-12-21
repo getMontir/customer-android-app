@@ -1,4 +1,4 @@
-package com.getmontir.customer.data.response
+package com.getmontir.lib.data.response
 
 import com.fasterxml.jackson.annotation.JsonProperty
 

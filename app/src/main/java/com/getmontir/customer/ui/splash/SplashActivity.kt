@@ -1,9 +1,8 @@
-package com.getmontir.customer.presentation
+package com.getmontir.customer.ui.splash
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.getmontir.customer.R
-import com.getmontir.customer.presentation.ui.main.SplashFragment
 
 class SplashActivity : AppCompatActivity() {
 

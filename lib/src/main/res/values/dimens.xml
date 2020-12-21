@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- LOADER -->
+    <dimen name="loader_padding">10dp</dimen>
+    <dimen name="loader_width">75dp</dimen>
+    <dimen name="loader_height">75dp</dimen>
+
+</resources>

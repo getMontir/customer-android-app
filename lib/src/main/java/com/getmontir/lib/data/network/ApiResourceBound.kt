@@ -1,14 +1,17 @@
-package com.getmontir.customer.data.network
+package com.getmontir.lib.data.network
 
 import android.content.Context
-import com.getmontir.customer.data.response.ResultWrapper
+import com.getmontir.lib.data.exception.network.NoConnectivityException
+import com.getmontir.lib.data.response.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import retrofit2.Response
 import timber.log.Timber
+import java.io.IOException
+import java.net.HttpURLConnection.*
 
 abstract class ApiResourceBound<ResultType : Any, RequestType : Any>(
     private val context: Context,
@@ -64,7 +67,23 @@ abstract class ApiResourceBound<ResultType : Any, RequestType : Any>(
                 }
             } catch( t: Exception ) {
                 Timber.tag(TAG).e(t)
-                emit(ResultWrapper.Error(t))
+                when( t ) {
+                    is IOException -> emit(ResultWrapper.Error.Network.NoConnectivity(t))
+                    is HttpException -> {
+                        when(t.code()) {
+                            HTTP_BAD_REQUEST -> emit(ResultWrapper.Error.Http.BadRequest(t))
+                            HTTP_NOT_FOUND -> emit(ResultWrapper.Error.Http.NotFound(t))
+                            HTTP_UNAUTHORIZED -> emit(ResultWrapper.Error.Http.Unauthorized(t))
+                            HTTP_BAD_METHOD -> emit(ResultWrapper.Error.Http.Validation(t))
+                            HTTP_UNAVAILABLE -> emit(ResultWrapper.Error.Http.Maintenance(t))
+                            else -> emit(ResultWrapper.Error.GenericError(t))
+                        }
+                    }
+                    else -> emit(ResultWrapper.Error.GenericError(t))
+                }
+            } catch ( t: NoConnectivityException ) {
+                Timber.tag(TAG).e(t)
+                emit(ResultWrapper.Error.Network.NoConnectivity(t))
             } finally {
                 emit(ResultWrapper.Loading(false))
             }
