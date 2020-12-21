@@ -13,19 +13,19 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class SplashFragment : BaseFragment() {
+open class SplashFragment : BaseFragment() {
 
     companion object {
         fun newInstance() = SplashFragment()
     }
 
-    protected val viewModel: SplashViewModel by viewModel()
+    private val viewModel: SplashViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_splash_screen, container, false)
     }
 
     @InternalCoroutinesApi

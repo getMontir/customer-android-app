@@ -23,7 +23,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GetMontir">
-        <activity android:name=".ui.splash.SplashActivity">
+        <activity android:name=".ui.splash.SplashActivity" android:theme="@style/Theme.GetMontir.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
