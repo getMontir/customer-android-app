@@ -40,5 +40,5 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v2.2.1
         with:
-          name: app-${{github.run_id}}
+          name: app-3.3.${{github.run_number}}
           path: app/build/outputs/apk/debug/app-debug.apk
