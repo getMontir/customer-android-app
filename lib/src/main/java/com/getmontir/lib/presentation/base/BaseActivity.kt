@@ -1,28 +1,28 @@
-package com.getmontir.lib.presentation.fragment
+package com.getmontir.lib.presentation.base
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.getmontir.lib.R
 import com.getmontir.lib.data.response.ResultWrapper
 import com.getmontir.lib.presentation.ErrorAlertType
 import com.getmontir.lib.presentation.dialog.LoaderDialog
+import com.getmontir.lib.presentation.utils.SessionManager
+import org.koin.android.ext.android.inject
 import timber.log.Timber
 
-open class BaseFragment: Fragment() {
+open class BaseActivity: AppCompatActivity() {
 
-    companion object {
-        private var TAG = BaseFragment::class.toString()
-    }
+    protected val sessionManager: SessionManager by inject()
 
     protected var showLoader: Boolean = true
 
     private var loaderDialog: LoaderDialog? = null
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        loaderDialog = context?.let { LoaderDialog(it) }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        loaderDialog = LoaderDialog(this)
     }
 
     open fun showLoader() {
@@ -63,8 +63,7 @@ open class BaseFragment: Fragment() {
 
     open fun handleGenericError( tag: String, e: Exception ) {
         Timber.tag(tag).e("Generic Error")
-        activity?.let {
-            val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        val alert = AlertDialog.Builder(this, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle("Ooopppsss..")
                 .setPositiveButton("Ok") { _, _ ->
                     onAlertErrorClosed(tag, ErrorAlertType.UNAUTHORIZED)
@@ -73,13 +72,11 @@ open class BaseFragment: Fragment() {
 
             alert.setMessage(e.message)
             alert.show()
-        }
     }
 
     open fun handleHttpBadRequest( tag: String, e:Exception ) {
         Timber.tag(tag).d("Bad Request")
-        activity?.let {
-            val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        val alert = AlertDialog.Builder(this, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle("Ooopppsss..")
                 .setPositiveButton("Ok") { _, _ ->
                     onAlertErrorClosed(tag, ErrorAlertType.BAD_REQUEST)
@@ -88,13 +85,11 @@ open class BaseFragment: Fragment() {
 
             alert.setMessage("Kesalah pengiriman data.")
             alert.show()
-        }
     }
 
     open fun handleHttpNotFound( tag: String, e: Exception ) {
         Timber.tag(tag).d("Not Found")
-        activity?.let {
-            val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        val alert = AlertDialog.Builder(this, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle("Ooopppsss..")
                 .setPositiveButton("Ok") { _, _ ->
                     onAlertErrorClosed(tag, ErrorAlertType.NOT_FOUND)
@@ -103,13 +98,11 @@ open class BaseFragment: Fragment() {
 
             alert.setMessage("Data tidak ditemukan.")
             alert.show()
-        }
     }
 
     open fun handleHttpMaintenance( tag: String, e: Exception ) {
         Timber.tag(tag).d("Maintenance")
-        activity?.let {
-            val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        val alert = AlertDialog.Builder(this, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle("Server Maintenance")
                 .setPositiveButton("Ok") { _, _ ->
                     onAlertErrorClosed(tag, ErrorAlertType.MAINTENANCE)
@@ -118,13 +111,11 @@ open class BaseFragment: Fragment() {
 
             alert.setMessage("Mohon maaf, saat ini server sedang mengalami update rutin.\nSilahkan kembali beberapa saat lagi")
             alert.show()
-        }
     }
 
     open fun handleHttpUnauthorized( tag: String, e: Exception ) {
         Timber.tag(tag).d("Unauthorized")
-        activity?.let {
-            val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        val alert = AlertDialog.Builder(this, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle("Ooopppsss..")
                 .setPositiveButton("Ok") { _, _ ->
                     onAlertErrorClosed(tag, ErrorAlertType.UNAUTHORIZED)
@@ -133,13 +124,11 @@ open class BaseFragment: Fragment() {
 
             alert.setMessage("Sesi telah habis, harap login kembali.")
             alert.show()
-        }
     }
 
     open fun handleHttpValidation( tag: String, e: Exception ) {
         Timber.tag(tag).d("Invalid Validation")
-        activity?.let {
-            val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        val alert = AlertDialog.Builder(this, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle("Ooopppsss..")
                 .setPositiveButton("Ok") { _, _ ->
                     onAlertErrorClosed(tag, ErrorAlertType.VALIDATION)
@@ -148,13 +137,11 @@ open class BaseFragment: Fragment() {
 
             alert.setMessage("Ada input yang belum diisin, harap periksa kembali.")
             alert.show()
-        }
     }
 
     open fun handleNetworkNoConnectivity(tag: String, e: Exception) {
         Timber.tag(tag).d("No Connectivity")
-        activity?.let {
-            val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+        val alert = AlertDialog.Builder(this, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle("Ooopppsss..")
                 .setNegativeButton("Tutup") { _, _ ->
                     onAlertErrorClosed(tag, ErrorAlertType.NO_CONNECTION)
@@ -166,14 +153,13 @@ open class BaseFragment: Fragment() {
 
             alert.setMessage("Tidak ada koneksi internet, harap periksa kembali koneksi internet Anda.")
             alert.show()
-        }
     }
 
     open fun onRetry(tag: String) {
         // DO NOTHING
     }
 
-    open fun onAlertErrorClosed( tag: String, type: ErrorAlertType ) {
+    open fun onAlertErrorClosed( tag: String, type: ErrorAlertType) {
         // DO NOTHING
     }
 }

@@ -1,7 +1,6 @@
 package com.getmontir.customer.ui.walkthrough
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
 import android.view.View
@@ -9,8 +8,9 @@ import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.getmontir.customer.R
 import com.getmontir.customer.databinding.ActivityWalkthroughBinding
+import com.getmontir.lib.presentation.base.BaseActivity
 
-class WalkthroughActivity : AppCompatActivity() {
+class WalkthroughActivity : BaseActivity() {
 
     private lateinit var binding: ActivityWalkthroughBinding
 
@@ -62,7 +62,7 @@ class WalkthroughActivity : AppCompatActivity() {
 
     private fun onSkipButtonClicked() {
         // Set session is used
-        // sessionManager.isUsed = true
+         sessionManager.isUsed = true
 
         // Launch acitivity
 //        startActivity(

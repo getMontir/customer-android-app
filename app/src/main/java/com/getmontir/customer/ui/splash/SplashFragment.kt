@@ -6,10 +6,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.getmontir.customer.R
 import com.getmontir.customer.ui.walkthrough.WalkthroughActivity
 import com.getmontir.customer.viewmodel.SplashViewModel
-import com.getmontir.lib.presentation.fragment.BaseFragment
+import com.getmontir.lib.presentation.base.BaseFragment
 import com.getmontir.lib.presentation.utils.SessionManager
 import kotlinx.coroutines.InternalCoroutinesApi
 import org.koin.android.ext.android.inject
@@ -24,8 +25,6 @@ open class SplashFragment : BaseFragment() {
 
     private val viewModel: SplashViewModel by viewModel()
 
-    private val sessionManager: SessionManager by inject()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +35,7 @@ open class SplashFragment : BaseFragment() {
     @InternalCoroutinesApi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        showLoader = false
         viewModel.customerVersion.observe( viewLifecycleOwner, {
             processData("version", it)
         })
