@@ -24,4 +24,8 @@
 
     <dimen name="component_label_horizontal_margin">@dimen/keyline_4</dimen>
     <dimen name="elevation_default_top_app_bar">4dp</dimen>
+
+    <!-- SLIDER DOTS -->
+    <dimen name="dots_height">30dp</dimen>
+    <dimen name="dots_margin_bottom">20dp</dimen>
 </resources>

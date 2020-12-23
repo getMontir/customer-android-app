@@ -79,4 +79,24 @@
     <color name="secondaryDarkColor">#aa0017</color>
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
+
+    <color name="dotInactiveColor">#33e4283d</color>
+    <color name="dotActiveColor">@color/secondaryColor</color>
+
+    <!-- ARRAY -->
+    <array name="array_dot_active">
+        <item>@color/dotActiveColor</item>
+        <item>@color/dotActiveColor</item>
+        <item>@color/dotActiveColor</item>
+        <item>@color/dotActiveColor</item>
+        <item>@color/dotActiveColor</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dotInactiveColor</item>
+        <item>@color/dotInactiveColor</item>
+        <item>@color/dotInactiveColor</item>
+        <item>@color/dotInactiveColor</item>
+        <item>@color/dotInactiveColor</item>
+    </array>
 </resources>

@@ -13,4 +13,6 @@ class SessionManager(private val context: Context, private val prefName: String)
 
     var language: String? by stringPref( prefName, session.language, "id")
 
+    var isLoggedIn: Boolean by booleanPref( prefName, session.isLoggedIn, false)
+
 }
