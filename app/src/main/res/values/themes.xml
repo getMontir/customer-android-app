@@ -10,8 +10,23 @@
         <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?android:attr/colorBackground</item>
     </style>
 
+    <style name="Theme.GetMontir.Auth">
+        <item name="android:statusBarColor" tools:ignore="NewApi">#0B2031</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
+        <item name="android:navigationBarColor" tools:ignore="NewApi">#0B2031</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?android:attr/colorBackground</item>
+    </style>
+
+    <style name="Theme.GetMontir.ActionBar"/>
+
+    <style name="Theme.GetMontir.ActionBar.White">
+        <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.White</item>
+    </style>
+
     <!--Base custom theme which will be shared between both light and dark theme variants-->
     <style name="Base.Theme.GetMontir" parent="Base.Theme.MaterialThemeBuilder">
+        <item name="fontFamily">@font/dm_sans</item>
 
         <!--Material color attributes (light theme) -->
         <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
@@ -63,6 +78,10 @@
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.GetMontir.BottomSheetDialog</item>
         <item name="navigationViewStyle">@style/Widget.GetMontir.NavigationView</item>
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
+
+        <item name="materialButtonStyle">@style/Theme.GetMontir.Button</item>
+        <item name="textInputStyle">@style/Theme.GetMontir.TextInputLayout</item>
+        <item name="checkboxStyle">@style/ThemeOverlay.GetMontir.CheckBox</item>
 
     </style>
 

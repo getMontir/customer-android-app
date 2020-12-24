@@ -6,14 +6,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
 import com.getmontir.customer.R
+import com.getmontir.customer.ui.auth.AuthActivity
 import com.getmontir.customer.ui.walkthrough.WalkthroughActivity
 import com.getmontir.customer.viewmodel.SplashViewModel
 import com.getmontir.lib.presentation.base.BaseFragment
-import com.getmontir.lib.presentation.utils.SessionManager
 import kotlinx.coroutines.InternalCoroutinesApi
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -66,6 +64,10 @@ open class SplashFragment : BaseFragment() {
                     // Launch Home Activity
                 } else {
                     // Launch Auth Activity
+                    startActivity(
+                        Intent(context, AuthActivity::class.java)
+                    )
+                    activity?.finish()
                 }
             }
         }

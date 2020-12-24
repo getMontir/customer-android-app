@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.GetMontir.Button" parent="Widget.MaterialComponents.Button">
+        <item name="shapeAppearance">@style/ShapeAppearance.GetMontir.Button</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Widget.GetMontir.Toolbar.White" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
+        <item name="android:background">@color/white_50</item>
+        <item name="titleTextColor">@color/primaryColor</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+</resources>

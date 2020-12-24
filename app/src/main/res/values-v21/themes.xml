@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Base.Theme.GetMontir" parent="Base.Theme.MaterialThemeBuilder">
+        <item name="fontFamily">@font/dm_sans</item>
+
+        <!--Material color attributes (light theme) -->
+        <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
+        <!--colorSecondary colors are most often used as accents on components, such as FABs and -->
+        <!--selection controls.-->
+        <item name="colorPrimary">@color/secondaryColor</item>
+        <item name="colorPrimaryVariant">@color/secondaryDarkColor</item>
+        <item name="colorSecondary">@color/primaryColor</item>
+        <item name="colorSecondaryVariant">@color/primaryDarkColor</item>
+
+        <!--colorBackground appears behind scrollable content and is used for the default window-->
+        <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
+        <!--and menus. colorError is used to indicate an error state for components such as-->
+        <!--text fields.-->
+        <item name="android:colorBackground">@color/white_50</item>
+        <item name="colorSurface">@color/white_50</item>
+        <item name="colorError">@color/red_600</item>
+
+        <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
+        <!--on which they appear.-->
+        <item name="colorOnPrimary">@color/white_50</item>
+        <item name="colorOnSecondary">@color/white_50</item>
+        <item name="colorOnBackground">@color/black_900</item>
+        <item name="colorOnSurface">@color/black_900</item>
+        <item name="colorOnError">@color/white_50</item>
+
+        <!--Material type attributes-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.GetMontir.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.GetMontir.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.GetMontir.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.GetMontir.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.GetMontir.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.GetMontir.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.GetMontir.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.GetMontir.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.GetMontir.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.GetMontir.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.GetMontir.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.GetMontir.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.GetMontir.Overline</item>
+
+        <!--Material shape attributes-->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MyTheme.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MyTheme.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyTheme.LargeComponent
+        </item>
+
+        <!--Component styles-->
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert
+        </item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.GetMontir.BottomSheetDialog</item>
+        <item name="navigationViewStyle">@style/Widget.GetMontir.NavigationView</item>
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
+
+        <item name="materialButtonStyle">@style/Theme.GetMontir.Button</item>
+        <item name="textInputStyle">@style/Theme.GetMontir.TextInputLayout</item>
+
+        <item name="android:windowActivityTransitions">true</item>
+
+    </style>
+</resources>

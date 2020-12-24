@@ -80,6 +80,8 @@
     <color name="primaryTextColor">#ffffff</color>
     <color name="secondaryTextColor">#000000</color>
 
+    <color name="transparent">#00FFFFFF</color>
+
     <color name="dotInactiveColor">#33e4283d</color>
     <color name="dotActiveColor">@color/secondaryColor</color>
 

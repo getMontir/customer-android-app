@@ -11,11 +11,20 @@
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
-            android:id="@+id/action_splashScreenFragment_to_offlineFragment"
-            app:destination="@id/offlineFragment" />
+            android:id="@+id/action_splashScreenFragment_to_walkthroughActivity"
+            app:destination="@id/walkthroughActivity" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_nav_auth"
+            app:destination="@id/nav_auth" />
     </fragment>
-    <fragment
-        android:id="@+id/offlineFragment"
-        android:name="com.getmontir.lib.presentation.ui.fragment.OfflineFragment"
-        android:label="OfflineFragment" />
+    <activity
+        android:id="@+id/walkthroughActivity"
+        android:name="com.getmontir.customer.ui.walkthrough.WalkthroughActivity"
+        android:label="activity_walkthrough"
+        tools:layout="@layout/activity_walkthrough" >
+        <action
+            android:id="@+id/action_walkthroughActivity_to_nav_auth"
+            app:destination="@id/nav_auth" />
+    </activity>
+    <include app:graph="@navigation/nav_auth" />
 </navigation>

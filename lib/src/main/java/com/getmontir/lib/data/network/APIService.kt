@@ -3,6 +3,9 @@ package com.getmontir.lib.data.network
 import android.content.Context
 import com.getmontir.lib.data.response.ApiResponse
 import com.getmontir.lib.BuildConfig
+import com.getmontir.lib.data.data.dto.CityDto
+import com.getmontir.lib.data.data.dto.DistrictDto
+import com.getmontir.lib.data.data.dto.ProvinceDto
 import com.getmontir.lib.ext.bodyToString
 import com.getmontir.lib.data.network.interceptor.NetworkConnectionInterceptor
 import com.getmontir.lib.presentation.utils.SessionManager
@@ -15,6 +18,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.jackson.JacksonConverterFactory
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 import timber.log.Timber
 import java.util.*
@@ -32,6 +36,27 @@ interface APIService {
     suspend fun checkUpdateStationAsync(
         @Field("req_version") version: Int
     ): Response<ApiResponse<Boolean>>
+
+    @GET("provinces")
+    suspend fun getProvincesAsync(): Response<ApiResponse<List<ProvinceDto>>>
+
+    @GET("cities")
+    suspend fun getCitiesAsync(): Response<ApiResponse<List<CityDto>>>
+
+    @GET("districts")
+    suspend fun getDistrictsAsync(): Response<ApiResponse<List<DistrictDto>>>
+
+    @FormUrlEncoded
+    @POST("province/cities")
+    suspend fun getCitiesFromProvinceAsync(
+        @Field("province_id") provinceId: String
+    ): Response<ApiResponse<List<CityDto>>>
+
+    @FormUrlEncoded
+    @POST("city/districts")
+    suspend fun getDistrictsFromCityAsync(
+        @Field("city_id") cityId: String
+    ): Response<ApiResponse<List<DistrictDto>>>
 
     companion object {
 

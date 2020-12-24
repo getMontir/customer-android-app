@@ -12,4 +12,7 @@
     <string name="walkthrough_second_description">Dengan sistem pemesanan yang mudah serta layanan customer service yang siap membantu anda untuk menservis kendaraan Anda.</string>
     <string name="walkthrough_third_title">Lebih Cepat</string>
     <string name="walkthrough_third_description">Kami memberikan pelayanan yang lebih cepat dengan sistem home service atau montir langsung datang ke rumah.</string>
+
+    <!-- AUTH ACTIVITY -->
+    <string name="sign_in_title">Masuk</string>
 </resources>

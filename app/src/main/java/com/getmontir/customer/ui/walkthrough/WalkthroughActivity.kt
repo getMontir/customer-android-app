@@ -1,6 +1,7 @@
 package com.getmontir.customer.ui.walkthrough
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.view.View
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import com.getmontir.customer.R
 import com.getmontir.customer.databinding.ActivityWalkthroughBinding
+import com.getmontir.customer.ui.auth.AuthActivity
 import com.getmontir.lib.presentation.base.BaseActivity
 
 class WalkthroughActivity : BaseActivity() {
@@ -65,9 +67,9 @@ class WalkthroughActivity : BaseActivity() {
          sessionManager.isUsed = true
 
         // Launch acitivity
-//        startActivity(
-//            Intent(this, )
-//        )
+        startActivity(
+            Intent(this, AuthActivity::class.java)
+        )
         finish()
     }
 
@@ -108,7 +110,11 @@ class WalkthroughActivity : BaseActivity() {
 
         for (i in dots.indices) {
             dots[i] = TextView(this)
-            dots[i]?.text = Html.fromHtml("&#8226;")
+            if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) {
+                dots[i]?.text = Html.fromHtml("&#8226;", Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                dots[i]?.text = Html.fromHtml("&#8226;")
+            }
             dots[i]?.textSize = 35f
             dots[i]?.setTextColor(colorsInactive[currentIndex])
             binding.layoutDots.addView(dots[i])

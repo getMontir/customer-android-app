@@ -36,7 +36,7 @@
     <!--Shape Appearance for small components like chips, buttons, text fields and FABs-->
     <style name="ShapeAppearance.MyTheme.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <!--Your custom shape here-->
-        <item name="cornerSize">40dp</item>
+        <item name="cornerSize">10dp</item>
     </style>
 
     <!--Shape Appearance for medium components like cards, alert dialogs-->
@@ -47,6 +47,10 @@
     <!--Shape Appearance for large components like side and bottom navigation drawers-->
     <style name="ShapeAppearance.MyTheme.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
         <!--Your custom shape here-->
+    </style>
+
+    <style name="ShapeAppearance.GetMontir.Button" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">40dp</item>
     </style>
 
 </resources>

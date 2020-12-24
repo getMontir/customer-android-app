@@ -1,4 +1,4 @@
-package com.getmontir.lib.data.repository
+package com.getmontir.lib.data.repository.eloquent
 
 import android.content.Context
 import com.getmontir.lib.data.network.APIService

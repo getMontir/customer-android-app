@@ -4,11 +4,11 @@
     android:height="18dp"
     android:viewportWidth="18"
     android:viewportHeight="18">
-    <group>
-        <path
-            android:fillColor="#FFF"
-            android:pathData="M0 7c0-3.87 3.13-7 7-7h4c3.87 0 7 3.13 7 7v4c0 3.87-3.13 7-7 7h-4c-3.87 0-7-3.13-7-7z"/>
-    </group>
+<!--    <group>-->
+<!--        <path-->
+<!--            android:fillColor="#FFF"-->
+<!--            android:pathData="M0 7c0-3.87 3.13-7 7-7h4c3.87 0 7 3.13 7 7v4c0 3.87-3.13 7-7 7h-4c-3.87 0-7-3.13-7-7z"/>-->
+<!--    </group>-->
     <path
         android:strokeColor="#F0F0F8"
         android:strokeWidth="1"

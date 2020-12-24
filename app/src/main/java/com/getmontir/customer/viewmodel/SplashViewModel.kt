@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.getmontir.lib.data.repository.VersionRepository
+import com.getmontir.lib.data.repository.eloquent.VersionRepository
 import com.getmontir.lib.data.response.ResultWrapper
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
