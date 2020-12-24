@@ -11,11 +11,19 @@
     </style>
 
     <style name="Theme.GetMontir.Auth">
+        <item name="homeAsUpIndicator">@drawable/abc_ic_clear_material</item>
         <item name="android:statusBarColor" tools:ignore="NewApi">#0B2031</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
         <item name="android:navigationBarColor" tools:ignore="NewApi">#0B2031</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
         <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?android:attr/colorBackground</item>
+        <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.White</item>
+    </style>
+
+    <style name="Theme.GetMontir.Auth.Inverted">
+        <item name="homeAsUpIndicator">@drawable/abc_ic_clear_material</item>
+        <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.Inverted</item>
+        <item name="actionOverflowButtonStyle">@style/Widget.GetMontir.ActionButton.Overflow</item>
     </style>
 
     <style name="Theme.GetMontir.ActionBar"/>

@@ -8,6 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.viewpager.widget.ViewPager
 import com.getmontir.customer.R
 import com.getmontir.customer.databinding.FragmentAuthChooserBinding
@@ -76,8 +81,19 @@ class AuthChooserFragment : GetFragment() {
             override fun onPageScrollStateChanged(state: Int) {
             }
         })
-        binding.btnLogin.setOnClickListener {  }
+        binding.btnLogin.setOnClickListener {
+            val action = AuthChooserFragmentDirections.actionAuthChooserFragmentToLoginFragment()
+            findNavController().navigate(action)
+        }
         binding.btnRegister.setOnClickListener {  }
+
+        val toolbar: Toolbar = binding.toolbar
+        val appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.authChooserFragment,
+            R.id.loginFragment
+        ))
+        val navHostFragment = NavHostFragment.findNavController(this)
+        NavigationUI.setupWithNavController(toolbar, navHostFragment, appBarConfiguration)
     }
 
     private fun onSliderChange(position: Int) {
