@@ -157,20 +157,20 @@ open class BaseFragment: Fragment() {
 
     open fun handleNetworkNoConnectivity(tag: String, e: Exception) {
         Timber.tag(tag).d("No Connectivity")
-        activity?.let {
-            val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
-                .setTitle("Ooopppsss..")
-                .setNegativeButton("Tutup") { _, _ ->
-                    onAlertErrorClosed(tag, ErrorAlertType.NO_CONNECTION)
-                }
-                .setPositiveButton("Coba Lagi") { _, _ ->
-                    onRetry(tag)
-                }
-                .create()
-
-            alert.setMessage("Tidak ada koneksi internet, harap periksa kembali koneksi internet Anda.")
-            alert.show()
-        }
+//        activity?.let {
+//            val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+//                .setTitle("Ooopppsss..")
+//                .setNegativeButton("Tutup") { _, _ ->
+//                    onAlertErrorClosed(tag, ErrorAlertType.NO_CONNECTION)
+//                }
+//                .setPositiveButton("Coba Lagi") { _, _ ->
+//                    onRetry(tag)
+//                }
+//                .create()
+//
+//            alert.setMessage("Tidak ada koneksi internet, harap periksa kembali koneksi internet Anda.")
+//            alert.show()
+//        }
     }
 
     open fun onRetry(tag: String) {

@@ -10,4 +10,8 @@
         android:name="com.getmontir.customer.view.ui.splash.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" />
+    <fragment
+        android:id="@+id/offlineFragment"
+        android:name="com.getmontir.customer.view.ui.base.OfflineFragment"
+        android:label="OfflineFragment" />
 </navigation>

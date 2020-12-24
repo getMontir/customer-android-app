@@ -5,14 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.getmontir.customer.R
+import com.getmontir.customer.view.ui.base.GetFragment
 import com.getmontir.customer.viewmodel.SplashViewModel
 import com.getmontir.lib.presentation.base.BaseFragment
 import kotlinx.coroutines.InternalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-open class SplashScreenFragment : BaseFragment() {
+open class SplashScreenFragment : GetFragment() {
 
     companion object {
         fun newInstance() = SplashScreenFragment()
@@ -30,7 +32,6 @@ open class SplashScreenFragment : BaseFragment() {
     @InternalCoroutinesApi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        showLoader = false
         viewModel.customerVersion.observe( viewLifecycleOwner, {
             processData("version", it)
         })
