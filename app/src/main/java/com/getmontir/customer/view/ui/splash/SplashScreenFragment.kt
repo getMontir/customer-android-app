@@ -1,5 +1,6 @@
 package com.getmontir.customer.view.ui.splash
 
+import android.content.Intent
 import com.getmontir.customer.BuildConfig
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.getmontir.customer.R
+import com.getmontir.customer.view.ui.AuthActivity
 import com.getmontir.customer.view.ui.base.GetFragment
 import com.getmontir.customer.viewmodel.SplashViewModel
 import com.getmontir.lib.presentation.base.BaseFragment
@@ -50,24 +52,33 @@ open class SplashScreenFragment : GetFragment() {
                 // Launch update activity
                 navController.navigate(R.id.updateFragment)
             } else {
-                if( !sessionManager.isUsed ) {
-                    // Launch Walkthrough
-    //                activity?.let {
-    //                    val intent = Intent(context, WalkthroughActivity::class.java)
-    //                    startActivity(intent)
-    //                    it.finish()
-    //                }
+                if( !sessionManager.isLoggedIn ) {
+                    // Launch Auth Activity
+                    startActivity(
+                        Intent(context, AuthActivity::class.java)
+                    )
+                    activity?.finish()
                 } else {
-                    if( sessionManager.isLoggedIn ) {
-                        // Launch Home Activity
-                    } else {
-                        // Launch Auth Activity
-    //                    startActivity(
-    //                        Intent(context, AuthActivity::class.java)
-    //                    )
-    //                    activity?.finish()
-                    }
+                    // Launch Home Activity
                 }
+//                if( !sessionManager.isUsed ) {
+//                    // Launch Walkthrough
+//                    activity?.let {
+//                        val intent = Intent(context, WalkthroughActivity::class.java)
+//                        startActivity(intent)
+//                        it.finish()
+//                    }
+//                } else {
+//                    if( sessionManager.isLoggedIn ) {
+//                        // Launch Home Activity
+//                    } else {
+//                        // Launch Auth Activity
+//                        startActivity(
+//                            Intent(context, AuthActivity::class.java)
+//                        )
+//                        activity?.finish()
+//                    }
+//                }
             }
         }
     }

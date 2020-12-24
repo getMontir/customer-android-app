@@ -41,6 +41,10 @@
         <item name="shapeAppearance">@style/ShapeAppearance.GetMontir.Button</item>
     </style>
 
+    <style name="Theme.GetMontir.Button.OutlinedButton.Primary">
+        <item name="strokeColor">@color/btn_stroke_color_selector</item>
+    </style>
+
     <style name="Theme.GetMontir.Button.OutlinedButton.Icon">
         <item name="android:paddingLeft">18dp</item>
         <item name="iconTint">@color/transparent</item>
