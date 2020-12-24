@@ -108,9 +108,26 @@ fun <S: Any, R: Any> apiResource(
     saveResult: suspend (items: S) -> Unit,
     load: suspend CoroutineScope.() -> S,
     callAsync: suspend CoroutineScope.() -> Response<R>
-) = ApiResourceDelegate<S,R>(
+) = apiResource(
     context,
     true,
+    callResponse,
+    shouldFetch,
+    saveResult,
+    load,
+    callAsync
+)
+fun <S: Any, R: Any> apiResource(
+    context: Context,
+    withDatabase: Boolean,
+    callResponse: (response: R?) -> S?,
+    shouldFetch: Boolean,
+    saveResult: suspend (items: S) -> Unit,
+    load: suspend CoroutineScope.() -> S,
+    callAsync: suspend CoroutineScope.() -> Response<R>
+) = ApiResourceDelegate<S,R>(
+    context,
+    withDatabase,
     callResponse,
     shouldFetch,
     saveResult,

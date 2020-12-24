@@ -1,5 +1,6 @@
 package com.getmontir.customer.di
 
+import com.getmontir.customer.viewmodel.LoginViewModel
 import com.getmontir.customer.viewmodel.SplashViewModel
 import com.getmontir.lib.di.databaseModules
 import com.getmontir.lib.di.remoteModule
@@ -15,6 +16,7 @@ val commonModule = module {
 
 val viewModelModule = module {
     viewModel { SplashViewModel( get() ) }
+    viewModel { LoginViewModel( get() ) }
 }
 
 val appModules = listOf(

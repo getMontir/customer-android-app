@@ -58,6 +58,22 @@ interface APIService {
         @Field("city_id") cityId: String
     ): Response<ApiResponse<List<DistrictDto>>>
 
+    @FormUrlEncoded
+    @POST("customer/auth")
+    suspend fun customerLogin(
+        @Field("email") email: String?,
+        @Field("password") password: String?
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("customer/auth/social")
+    suspend fun customerLoginSocial(
+        @Field("token") token: String,
+        @Field("fcm_token") fcmToken: String,
+        @Field("channel") channel: String,
+        @Field("device") device: String
+    ): Response<ApiResponse<String>>
+
     companion object {
 
         private const val debugURL = "http://getmontir.paperplane.id/api/"
@@ -84,9 +100,9 @@ interface APIService {
 
                     val builder = newRequest.newBuilder()
 
-//                    if( sessionManager.isLoggedIn ) {
-//                        builder.header("Authorization", "Bearer " + sessionManager.token)
-//                    }
+                    if( sessionManager.isLoggedIn ) {
+                        builder.header("Authorization", "Bearer " + sessionManager.token)
+                    }
 
                     if( listOf("put", "patch", "delete").contains(
                             newRequest.method.toLowerCase(

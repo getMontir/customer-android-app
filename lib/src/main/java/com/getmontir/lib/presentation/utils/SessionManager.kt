@@ -15,4 +15,6 @@ class SessionManager(private val context: Context, private val prefName: String)
 
     var isLoggedIn: Boolean by booleanPref( prefName, session.isLoggedIn, false)
 
+    var token: String? by stringPref( prefName, session.token, null )
+
 }
