@@ -1,24 +1,21 @@
-package com.getmontir.customer.ui.splash
+package com.getmontir.customer.view.ui.splash
 
-import android.content.Intent
 import com.getmontir.customer.BuildConfig
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.getmontir.customer.R
-import com.getmontir.customer.ui.auth.AuthActivity
-import com.getmontir.customer.ui.walkthrough.WalkthroughActivity
 import com.getmontir.customer.viewmodel.SplashViewModel
 import com.getmontir.lib.presentation.base.BaseFragment
 import kotlinx.coroutines.InternalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-open class SplashFragment : BaseFragment() {
+open class SplashScreenFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = SplashFragment()
+        fun newInstance() = SplashScreenFragment()
     }
 
     private val viewModel: SplashViewModel by viewModel()
@@ -50,24 +47,23 @@ open class SplashFragment : BaseFragment() {
             if( d ) {
                 // Launch update activity
             } else {
-            }
-
-            if( !sessionManager.isUsed ) {
-                // Launch Walkthrough
-                activity?.let {
-                    val intent = Intent(context, WalkthroughActivity::class.java)
-                    startActivity(intent)
-                    it.finish()
-                }
-            } else {
-                if( sessionManager.isLoggedIn ) {
-                    // Launch Home Activity
+                if( !sessionManager.isUsed ) {
+                    // Launch Walkthrough
+    //                activity?.let {
+    //                    val intent = Intent(context, WalkthroughActivity::class.java)
+    //                    startActivity(intent)
+    //                    it.finish()
+    //                }
                 } else {
-                    // Launch Auth Activity
-                    startActivity(
-                        Intent(context, AuthActivity::class.java)
-                    )
-                    activity?.finish()
+                    if( sessionManager.isLoggedIn ) {
+                        // Launch Home Activity
+                    } else {
+                        // Launch Auth Activity
+    //                    startActivity(
+    //                        Intent(context, AuthActivity::class.java)
+    //                    )
+    //                    activity?.finish()
+                    }
                 }
             }
         }

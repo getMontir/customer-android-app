@@ -24,19 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GetMontir">
         <activity
-            android:name=".ui.auth.ui.forgot.ForgotPasswordActivity"
-            android:parentActivityName=".ui.auth.AuthActivity"
-            android:theme="@style/Theme.GetMontir.ActionBar.White">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.auth.AuthActivity"/>
-        </activity>
-        <activity
-            android:name=".ui.auth.AuthActivity"
-            android:theme="@style/Theme.GetMontir.Auth" />
-        <activity android:name=".ui.walkthrough.WalkthroughActivity" />
-        <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name="com.getmontir.customer.view.ui.SplashScreenActivity"
             android:theme="@style/Theme.GetMontir.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
