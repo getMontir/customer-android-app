@@ -44,9 +44,11 @@ open class SplashScreenFragment : GetFragment() {
         val d = data as Boolean
         if( tag == "version") {
             Timber.tag("ASU").d(d.toString())
+            val navController = findNavController()
 
             if( d ) {
                 // Launch update activity
+                navController.navigate(R.id.updateFragment)
             } else {
                 if( !sessionManager.isUsed ) {
                     // Launch Walkthrough

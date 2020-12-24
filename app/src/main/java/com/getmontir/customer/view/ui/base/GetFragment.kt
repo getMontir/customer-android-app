@@ -10,4 +10,8 @@ open class GetFragment: BaseFragment() {
         super.handleNetworkNoConnectivity(tag, e)
         findNavController().navigate(R.id.offlineFragment)
     }
+
+    open fun navigateToUpdate() {
+        findNavController().navigate(R.id.updateFragment)
+    }
 }

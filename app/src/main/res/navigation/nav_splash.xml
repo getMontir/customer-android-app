@@ -9,9 +9,18 @@
         android:id="@+id/splashScreenFragment"
         android:name="com.getmontir.customer.view.ui.splash.SplashScreenFragment"
         android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" />
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
     <fragment
         android:id="@+id/offlineFragment"
         android:name="com.getmontir.customer.view.ui.base.OfflineFragment"
         android:label="OfflineFragment" />
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.getmontir.customer.view.ui.base.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" />
 </navigation>
