@@ -3,6 +3,8 @@
     <string name="google_sign_in_key" translatable="false">497671198429-jcf85n7dgmmnjftjnr95s26uh86a635v.apps.googleusercontent.com</string>
     <string name="google_sign_in_key_lib" translatable="false">497671198429-guc425ktf2c333r66g8u20fb2j46bcfa.apps.googleusercontent.com</string>
     <string name="gso_web_client_id">497671198429-kfmjc1620fufbevcpf1a7haaf8o6jj9l.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">254994588228342</string>
+    <string name="fb_login_protocol_scheme">fb254994588228342</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- WALKTHROUGH ACTIVITY -->

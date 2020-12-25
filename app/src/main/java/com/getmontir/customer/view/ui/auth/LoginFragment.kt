@@ -13,6 +13,10 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
 import com.getmontir.customer.R
 import com.getmontir.customer.databinding.FragmentAuthLoginBinding
 import com.getmontir.customer.view.ui.base.GetFragment
@@ -56,6 +60,8 @@ class LoginFragment : GetFragment() {
     private lateinit var binding: FragmentAuthLoginBinding
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+
+    private lateinit var callbackManager: CallbackManager
 
     private val viewModel: LoginViewModel by viewModel()
 
@@ -105,6 +111,10 @@ class LoginFragment : GetFragment() {
         val navHostFragment = NavHostFragment.findNavController(this)
         NavigationUI.setupWithNavController(toolbar, navHostFragment)
 
+        // Setup FCM
+        setupFCM()
+        callbackManager = CallbackManager.Factory.create()
+
         // Setup view model
         viewModel.token.observe(viewLifecycleOwner, {
             processData("token", it)
@@ -118,11 +128,27 @@ class LoginFragment : GetFragment() {
             val intent = googleSignInClient.signInIntent
             resultLauncher.launch(intent)
         }
-        binding.divider.btnSocialFacebook.setOnClickListener {  }
-        binding.textActionForgot.setOnClickListener {  }
+        binding.divider.btnSocialFacebook.setOnClickListener {
+            binding.divider.btnFacebook.performClick()
+        }
+        binding.divider.btnFacebook.setPermissions("email", "public_profile")
+        binding.divider.btnFacebook.fragment = this
+        binding.divider.btnFacebook.registerCallback(callbackManager, object: FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult?) {
+                Timber.tag(TAG).d("facebook:onSuccess $result")
+            }
 
-        // Setup FCM
-        setupFCM()
+            override fun onCancel() {
+                Timber.tag(TAG).d("facebook:onCancel")
+            }
+
+            override fun onError(error: FacebookException?) {
+                Timber.tag(TAG).d("facebook:onError")
+                Timber.tag(TAG).e(error)
+            }
+
+        })
+        binding.textActionForgot.setOnClickListener {  }
     }
 
     override fun processResult(tag: String, data: Any?) {
@@ -168,14 +194,12 @@ class LoginFragment : GetFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Timber.tag(TAG).d("ACTIVITYRESULT:: $resultCode")
+        Timber.tag(TAG).d("ACTIVITYRESULT:RESULTCODE:: $resultCode")
+        Timber.tag(TAG).d("ACTIVITYRESULT:REQUESTCODE:: $requestCode")
 
-        if( requestCode == GOOGLE_SIGN_IN && resultCode == Activity.RESULT_OK ) {
-            Timber.tag(TAG).d("Google success")
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            account = task.getResult(ApiException::class.java)
-            idToken = account?.idToken
-            Timber.tag(TAG).d(idToken)
+        if( resultCode == Activity.RESULT_OK ) {
+            // Pass the activity result back to the Facebook SDK
+            callbackManager.onActivityResult(requestCode, resultCode, data)
         }
     }
 }
