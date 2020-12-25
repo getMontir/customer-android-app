@@ -52,8 +52,6 @@ class LoginFragment : GetFragment() {
          */
         @JvmStatic
         fun newInstance() = LoginFragment()
-        private const val GOOGLE_SIGN_IN = 1
-        private const val FACEBOOK_SIGN_IN = -1
         private val TAG = LoginFragment::class.java.simpleName
     }
 
@@ -77,6 +75,7 @@ class LoginFragment : GetFragment() {
 
     private var account: GoogleSignInAccount? = null
 
+    @InternalCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -95,6 +94,8 @@ class LoginFragment : GetFragment() {
                 Timber.tag(TAG).d("Token $idToken")
 
                 idEmail = account?.email
+
+                idToken?.let { viewModel.loginGoogle(it, fcmToken ) }
             }
         }
 
@@ -136,6 +137,8 @@ class LoginFragment : GetFragment() {
         binding.divider.btnFacebook.registerCallback(callbackManager, object: FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult?) {
                 Timber.tag(TAG).d("facebook:onSuccess $result")
+                val token = result?.accessToken.toString()
+                viewModel.loginFacebook(token, fcmToken)
             }
 
             override fun onCancel() {
