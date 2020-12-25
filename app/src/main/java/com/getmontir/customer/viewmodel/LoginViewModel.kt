@@ -31,15 +31,28 @@ class LoginViewModel(
     }
 
     @InternalCoroutinesApi
-    fun loginSocial(
+    fun loginGoogle(
         token: String,
-        fcmToken: String,
-        channel: String,
-        device: String
+        fcmToken: String
     ) {
        viewModelScope.launch {
            repo.customerLoginSocial(
-               token, fcmToken, channel, device
+               token, fcmToken, "google", "android"
+           )
+               .collect {
+                   _token.value = it
+               }
+       }
+    }
+
+    @InternalCoroutinesApi
+    fun loginFacebook(
+        token: String,
+        fcmToken: String
+    ) {
+        viewModelScope.launch {
+           repo.customerLoginSocial(
+               token, fcmToken, "facebook", "android"
            )
                .collect {
                    _token.value = it
