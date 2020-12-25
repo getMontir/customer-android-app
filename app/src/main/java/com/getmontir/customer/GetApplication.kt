@@ -3,6 +3,7 @@ package com.getmontir.customer
 import android.app.Application
 import com.getmontir.customer.BuildConfig
 import com.getmontir.customer.di.appModules
+import com.google.firebase.database.FirebaseDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.startKoin
@@ -21,6 +22,9 @@ open class GetApplication: Application() {
         // KOIN
         configureDi()
         loadKoinModules(appModules)
+
+        // Firebase Setup
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
     }
 
     // CONFIGURATION ---

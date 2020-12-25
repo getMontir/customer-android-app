@@ -2,15 +2,30 @@ package com.getmontir.lib.ext
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Patterns
 import android.widget.EditText
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-fun TextInputEditText.isPassword(errorString: String, length: Int = 6): Boolean {
+fun TextInputEditText.isEmailNotNull( nullString: String, emailString: String ): Boolean {
     val textInputLayout = this.parent.parent as TextInputLayout
     textInputLayout.errorIconDrawable = null
+    val matches = Patterns.EMAIL_ADDRESS.matcher(this.text.toString().trim()).matches()
+    return if( this.isNotNullOrEmpty(nullString) ) {
+        textInputLayout.error = if( matches ) null else emailString
+        matches
+    } else {
+        false
+    }
+}
+
+fun TextInputEditText.isPassword(errorString: String, lengthErrorString: String, length: Int = 6): Boolean {
+    val textInputLayout = this.parent.parent as TextInputLayout
+    textInputLayout.errorIconDrawable = null
+    val matches = this.text.toString().trim().length >= length
     return if ( this.isNotNullOrEmpty(errorString) ) {
-        this.text.toString().trim().length >= length
+        textInputLayout.error = if( matches ) null else lengthErrorString
+        matches
     } else {
         false
     }
