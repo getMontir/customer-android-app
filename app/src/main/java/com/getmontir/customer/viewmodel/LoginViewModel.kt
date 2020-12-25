@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.getmontir.lib.data.data.entity.UserEntity
 import com.getmontir.lib.data.repository.eloquent.AuthRepository
 import com.getmontir.lib.data.response.ResultWrapper
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -16,6 +17,9 @@ class LoginViewModel(
 
     private val _token = MutableLiveData<ResultWrapper<String>>()
     val token: LiveData<ResultWrapper<String>> get() = _token
+
+    private val _user = MutableLiveData<ResultWrapper<UserEntity>>()
+    val user: LiveData<ResultWrapper<UserEntity>> get() = _user
 
     @InternalCoroutinesApi
     fun login(
@@ -58,5 +62,15 @@ class LoginViewModel(
                    _token.value = it
                }
        }
+    }
+
+    @InternalCoroutinesApi
+    fun profile() {
+        viewModelScope.launch {
+            repo.profile()
+                .collect {
+                    _user.value = it
+                }
+        }
     }
 }

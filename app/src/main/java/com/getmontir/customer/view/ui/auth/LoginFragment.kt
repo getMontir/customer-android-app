@@ -120,6 +120,9 @@ class LoginFragment : GetFragment() {
         viewModel.token.observe(viewLifecycleOwner, {
             processData("token", it)
         })
+        viewModel.user.observe(viewLifecycleOwner, {
+            processData("user", it)
+        })
 
         // Setup listener
         binding.btnSignIn.setOnClickListener {
@@ -154,11 +157,13 @@ class LoginFragment : GetFragment() {
         binding.textActionForgot.setOnClickListener {  }
     }
 
+    @InternalCoroutinesApi
     override fun processResult(tag: String, data: Any?) {
         super.processResult(tag, data)
 
         if( tag == "token" ) {
             // Load user information
+            viewModel.profile()
         }
 
         if( tag == "user" ) {

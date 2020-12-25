@@ -3,9 +3,7 @@ package com.getmontir.lib.data.network
 import android.content.Context
 import com.getmontir.lib.data.response.ApiResponse
 import com.getmontir.lib.BuildConfig
-import com.getmontir.lib.data.data.dto.CityDto
-import com.getmontir.lib.data.data.dto.DistrictDto
-import com.getmontir.lib.data.data.dto.ProvinceDto
+import com.getmontir.lib.data.data.dto.*
 import com.getmontir.lib.ext.bodyToString
 import com.getmontir.lib.data.network.interceptor.NetworkConnectionInterceptor
 import com.getmontir.lib.presentation.utils.SessionManager
@@ -60,19 +58,25 @@ interface APIService {
 
     @FormUrlEncoded
     @POST("customer/auth")
-    suspend fun customerLogin(
+    suspend fun customerLoginAsync(
         @Field("email") email: String?,
         @Field("password") password: String?
     ): Response<ApiResponse<String>>
 
     @FormUrlEncoded
     @POST("customer/auth/social")
-    suspend fun customerLoginSocial(
+    suspend fun customerLoginSocialAsync(
         @Field("token") token: String,
         @Field("fcm_token") fcmToken: String,
         @Field("channel") channel: String,
         @Field("device") device: String
     ): Response<ApiResponse<String>>
+
+    @POST("profile")
+    suspend fun profileUserAsync(): Response<ApiResponse<UserDto>>
+
+    @GET("customer/user")
+    suspend fun customerProfileAsync(): Response<ApiResponse<DetailCustomerDto>>
 
     companion object {
 
