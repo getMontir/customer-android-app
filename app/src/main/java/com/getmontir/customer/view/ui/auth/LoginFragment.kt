@@ -139,9 +139,12 @@ class LoginFragment : GetFragment() {
         binding.divider.btnFacebook.fragment = this
         binding.divider.btnFacebook.registerCallback(callbackManager, object: FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult?) {
-                Timber.tag(TAG).d("facebook:onSuccess $result")
-                val token = result?.accessToken.toString()
-                viewModel.loginFacebook(token, fcmToken)
+                val accessToken = result?.accessToken
+                val token = accessToken?.token
+                Timber.tag(TAG).d("facebook:onSuccess $token")
+                if (token != null) {
+                    viewModel.loginFacebook(token, fcmToken)
+                }
             }
 
             override fun onCancel() {

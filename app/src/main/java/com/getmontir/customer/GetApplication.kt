@@ -1,6 +1,8 @@
 package com.getmontir.customer
 
 import android.app.Application
+import com.facebook.FacebookSdk
+import com.facebook.appevents.AppEventsLogger
 import com.getmontir.customer.BuildConfig
 import com.getmontir.customer.di.appModules
 import com.google.firebase.database.FirebaseDatabase
@@ -25,6 +27,10 @@ open class GetApplication: Application() {
 
         // Firebase Setup
         FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+
+        // Facebook
+        FacebookSdk.sdkInitialize(applicationContext);
+        AppEventsLogger.activateApp(this);
     }
 
     // CONFIGURATION ---
