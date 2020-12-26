@@ -10,6 +10,7 @@ sealed class ResultWrapper<out T: Any> {
             class Maintenance(exception: Exception): Http(exception)
             class Unauthorized(exception: Exception): Http(exception)
             class Validation(exception: Exception): Http(exception)
+            class ServerError(exception: Exception): Http(exception)
         }
         sealed class Network(val e: Exception): Error(e) {
             class NoConnectivity(exception: Exception): Network(exception)

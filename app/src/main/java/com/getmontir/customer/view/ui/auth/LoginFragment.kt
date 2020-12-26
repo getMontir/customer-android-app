@@ -196,7 +196,7 @@ class LoginFragment : GetFragment() {
 
                 // Get new Instance ID token
                 fcmToken = task.result.toString()
-
+                Timber.tag(TAG).d("FCM Token: $fcmToken")
             }
     }
 

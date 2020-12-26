@@ -105,7 +105,7 @@ interface APIService {
                     val builder = newRequest.newBuilder()
 
                     if( sessionManager.isLoggedIn ) {
-                        builder.header("Authorization", "Bearer " + sessionManager.token)
+                        builder.addHeader("Authorization", "Bearer " + sessionManager.token)
                     }
 
                     if( listOf("put", "patch", "delete").contains(

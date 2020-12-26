@@ -50,6 +50,7 @@ open class BaseFragment: Fragment() {
             is ResultWrapper.Error.Http.Maintenance -> handleHttpMaintenance(tag,data.e)
             is ResultWrapper.Error.Http.Unauthorized -> handleHttpUnauthorized(tag,data.e)
             is ResultWrapper.Error.Http.Validation -> handleHttpValidation(tag,data.e)
+            is ResultWrapper.Error.Http.ServerError -> handleServerError(tag, data.e)
             is ResultWrapper.Error.Network.NoConnectivity -> handleNetworkNoConnectivity(tag,data.e)
             is ResultWrapper.Loading -> {
                 if( data.loading ) {
@@ -151,6 +152,21 @@ open class BaseFragment: Fragment() {
                 .create()
 
             alert.setMessage("Ada input yang belum diisin, harap periksa kembali.")
+            alert.show()
+        }
+    }
+
+    open fun handleServerError(tag: String, e:Exception) {
+        Timber.tag(tag).e("Server Error")
+        activity?.let {
+            val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+                .setTitle("Ooopppsss..")
+                .setPositiveButton("Ok") { _, _ ->
+                    onAlertErrorClosed(tag, ErrorAlertType.INTERNAL_ERROR)
+                }
+                .create()
+
+            alert.setMessage("Terjadi kesalahan pada dari server (500).")
             alert.show()
         }
     }

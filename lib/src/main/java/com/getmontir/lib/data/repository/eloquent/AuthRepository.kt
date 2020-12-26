@@ -23,7 +23,7 @@ class AuthRepository(
     fun customerLogin(
         email: String?,
         password: String?
-    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context, false) {
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
         override fun processResponse(response: ApiResponse<String>?): String? {
             return response?.data
         }
@@ -53,7 +53,7 @@ class AuthRepository(
         fcmToken: String,
         channel: String,
         device: String
-    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context, false) {
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
         override fun processResponse(response: ApiResponse<String>?): String? {
             return response?.data
         }
@@ -78,7 +78,7 @@ class AuthRepository(
     }.build()
 
     @InternalCoroutinesApi
-    fun profile(): Flow<ResultWrapper<UserEntity>> = object: ApiResourceBound<UserEntity, ApiResponse<UserDto>>(context, false) {
+    fun profile(): Flow<ResultWrapper<UserEntity>> = object: ApiResourceBound<UserEntity, ApiResponse<UserDto>>(context) {
         override fun processResponse(response: ApiResponse<UserDto>?): UserEntity? {
             return response?.data?.entity()
         }

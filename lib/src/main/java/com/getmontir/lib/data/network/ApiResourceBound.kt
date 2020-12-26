@@ -63,14 +63,19 @@ abstract class ApiResourceBound<ResultType : Any, RequestType : Any>(
                     val apiResponse = createCallAsync()
 
                     if( apiResponse.isSuccessful ) {
+                        Timber.tag(TAG).e("Fetch successful")
                         processResponse(apiResponse.body())?.let {
                             if( withDatabase ) {
                                 saveCallResults(it)
                             }
                             emit(ResultWrapper.Success(it))
                         }
+                    } else {
+                        Timber.tag(TAG).e("Fetch not successful")
+                        throw HttpException(apiResponse)
                     }
                 } else {
+                    Timber.tag(TAG).d("Fetch from local data")
                     emit(ResultWrapper.Success(dbResult))
                 }
             } catch( t: Exception ) {
@@ -79,6 +84,7 @@ abstract class ApiResourceBound<ResultType : Any, RequestType : Any>(
                     is IOException -> emit(ResultWrapper.Error.Network.NoConnectivity(t))
                     is HttpException -> {
                         when(t.code()) {
+                            HTTP_INTERNAL_ERROR -> emit(ResultWrapper.Error.Http.ServerError(t))
                             HTTP_BAD_REQUEST -> emit(ResultWrapper.Error.Http.BadRequest(t))
                             HTTP_NOT_FOUND -> emit(ResultWrapper.Error.Http.NotFound(t))
                             HTTP_UNAUTHORIZED -> emit(ResultWrapper.Error.Http.Unauthorized(t))
