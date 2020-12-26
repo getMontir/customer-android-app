@@ -213,4 +213,31 @@ class LoginFragment : GetFragment() {
             callbackManager.onActivityResult(requestCode, resultCode, data)
         }
     }
+
+    /**
+     * When user credential not found
+     */
+    override fun handleHttpNotFound(tag: String, e: Exception) {
+        if( tag == "token" ) {
+            binding.textLayoutEmail.error = "Pengguna tidak ditemukan"
+        }
+    }
+
+    /**
+     * When user credential wrong
+     */
+    override fun handleHttpValidation(tag: String, e: Exception) {
+        if( tag == "token" ) {
+            binding.textLayoutEmail.error = "Email atau kata sandi salah"
+        }
+    }
+
+    /**
+     * When user is banned
+     */
+    override fun handleHttpBadRequest(tag: String, e: Exception) {
+        if( tag == "token" ) {
+            binding.textLayoutEmail.error = "Akun Anda dalam status diblokir"
+        }
+    }
 }
