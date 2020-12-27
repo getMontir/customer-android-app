@@ -7,8 +7,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -44,6 +42,7 @@ jobs:
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 1
   notification:
+    name: Notification to Slack
     needs: [apk]
     runs-on: ubuntu-latest
     steps:
@@ -51,10 +50,16 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: app-3.3.${{github.run_number}}
-          path: artifact/download/app
+          path: artifact/download/debug
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: artifact/download/debug
       - name: Upload to Slack
         uses: adrey/slack-file-upload-action@master
         with:
           token: ${{ secrets.SLACK_OAUTH_TOKEN }}
-          path: artifact/download/app
+          path: artifact/download/debug/app-debug.apk
           channel: dev-app-customer
+          initial_comment: Versi 3.3.${{github.run_number}}
+          title: app-debug-3.3.${{github.run_number}}.apk
+          filename: app-debug-3.3.${{github.run_number}}.apk
