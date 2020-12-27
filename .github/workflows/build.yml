@@ -7,8 +7,6 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -62,3 +60,5 @@ jobs:
           token: ${{ secrets.SLACK_OAUTH_TOKEN }}
           path: artifact/download/debug/app-debug.apk
           channel: dev-app-customer
+          initial_comment: Versi 3.3.${{github.run_number}}
+          filename: app-3.3.${{github.run_number}}
