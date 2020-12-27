@@ -28,6 +28,7 @@ jobs:
         run: bash ./gradlew test --stacktrace
   apk:
     name: Generate APK
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
@@ -43,3 +44,17 @@ jobs:
           name: app-3.3.${{github.run_number}}
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 1
+  notification:
+    needs: [apk]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: app-3.3.${{github.run_number}}
+      - name: Upload to Slack
+        uses: adrey/slack-file-upload-action@master
+        with:
+          token: ${{ secrets.SLACK_OAUTH_TOKEN }}
+          path: app/build/outputs/apk/debug/app-debug.apk
+          channel: dev-app-customer
