@@ -78,6 +78,69 @@ class AuthRepository(
     }.build()
 
     @InternalCoroutinesApi
+    fun customerRegister(
+        name: String,
+        phone: String,
+        email: String,
+        password: String,
+        passwordConfirmation: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
+
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.isLoggedIn = true
+            sessionManager.token = items
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.token
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.customerRegisterAsync(name, phone, email, password, passwordConfirmation)
+        }
+
+    }.build()
+
+    @InternalCoroutinesApi
+    fun customerRegisterSocial(
+        token: String,
+        fcmToken: String,
+        channel: String,
+        device: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
+
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.isLoggedIn = true
+            sessionManager.token = items
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.token
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.customerRegisterSocialAsync(token, fcmToken, channel, device)
+        }
+
+    }.build()
+
+    @InternalCoroutinesApi
     fun profile(): Flow<ResultWrapper<UserEntity>> = object: ApiResourceBound<UserEntity, ApiResponse<UserDto>>(context) {
         override fun processResponse(response: ApiResponse<UserDto>?): UserEntity? {
             return response?.data?.entity()

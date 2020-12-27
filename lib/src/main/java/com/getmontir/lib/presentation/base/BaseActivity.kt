@@ -41,12 +41,12 @@ open class BaseActivity: AppCompatActivity() {
         when( data ) {
             is ResultWrapper.Success -> processResult(tag, data.data)
             is ResultWrapper.Error.GenericError -> handleGenericError(tag, data.exception)
-            is ResultWrapper.Error.Http.BadRequest -> handleHttpBadRequest(tag, data.e)
-            is ResultWrapper.Error.Http.NotFound -> handleHttpNotFound(tag,data.e)
-            is ResultWrapper.Error.Http.Maintenance -> handleHttpMaintenance(tag,data.e)
-            is ResultWrapper.Error.Http.Unauthorized -> handleHttpUnauthorized(tag,data.e)
-            is ResultWrapper.Error.Http.Validation -> handleHttpValidation(tag,data.e)
-            is ResultWrapper.Error.Network.NoConnectivity -> handleNetworkNoConnectivity(tag,data.e)
+            is ResultWrapper.Error.Http.BadRequest -> handleHttpBadRequest(tag, data.exception)
+            is ResultWrapper.Error.Http.NotFound -> handleHttpNotFound(tag,data.exception)
+            is ResultWrapper.Error.Http.Maintenance -> handleHttpMaintenance(tag,data.exception)
+            is ResultWrapper.Error.Http.Unauthorized -> handleHttpUnauthorized(tag,data.exception)
+            is ResultWrapper.Error.Http.BadMethod -> handleHttpValidation(tag,data.exception)
+            is ResultWrapper.Error.Network.NoConnectivity -> handleNetworkNoConnectivity(tag,data.exception)
             is ResultWrapper.Loading -> {
                 if( data.loading ) {
                     showLoader()

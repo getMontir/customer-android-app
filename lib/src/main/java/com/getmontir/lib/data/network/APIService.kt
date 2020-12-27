@@ -72,6 +72,25 @@ interface APIService {
         @Field("device") device: String
     ): Response<ApiResponse<String>>
 
+    @FormUrlEncoded
+    @POST("customer/register")
+    suspend fun customerRegisterAsync(
+        @Field("name") name: String,
+        @Field("phone") phone: String,
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("password_confirmation") passwordConfirmation: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("customer/register/social")
+    suspend fun customerRegisterSocialAsync(
+        @Field("token") token: String,
+        @Field("fcm_token") fcmToken: String,
+        @Field("channel") channel: String,
+        @Field("device") device: String
+    ): Response<ApiResponse<String>>
+
     @POST("profile")
     suspend fun profileUserAsync(): Response<ApiResponse<UserDto>>
 

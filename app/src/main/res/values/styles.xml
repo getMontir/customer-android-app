@@ -89,7 +89,7 @@
     </style>
 
     <style name="Widget.GetMontir.Toolbar.Inverted" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
-        <item name="android:background">@color/transparent</item>
+        <item name="android:background">#0B2031</item>
         <item name="titleTextColor">@color/white_50</item>
         <item name="homeAsUpIndicator">@drawable/abc_ic_clear_material</item>
     </style>

@@ -3,7 +3,7 @@ package com.getmontir.customer.di
 import com.getmontir.customer.services.FirebaseAuthModule
 import com.getmontir.customer.services.FirebaseDatabaseModule
 import com.getmontir.customer.services.GoogleClientModule
-import com.getmontir.customer.viewmodel.LoginViewModel
+import com.getmontir.customer.viewmodel.AuthViewModel
 import com.getmontir.customer.viewmodel.SplashViewModel
 import com.getmontir.lib.di.databaseModules
 import com.getmontir.lib.di.remoteModule
@@ -22,7 +22,7 @@ val commonModule = module {
 
 val viewModelModule = module {
     viewModel { SplashViewModel( get() ) }
-    viewModel { LoginViewModel( get() ) }
+    viewModel { AuthViewModel( get() ) }
 }
 
 val appModules = listOf(

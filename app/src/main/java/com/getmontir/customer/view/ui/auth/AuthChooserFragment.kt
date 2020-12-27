@@ -85,7 +85,10 @@ class AuthChooserFragment : GetFragment() {
             val action = AuthChooserFragmentDirections.actionAuthChooserFragmentToLoginFragment()
             findNavController().navigate(action)
         }
-        binding.btnRegister.setOnClickListener {  }
+        binding.btnRegister.setOnClickListener {
+            val action = AuthChooserFragmentDirections.actionAuthChooserFragmentToRegisterFragment()
+            findNavController().navigate(action)
+        }
 
         val toolbar: Toolbar = binding.toolbar
         val appBarConfiguration = AppBarConfiguration(setOf(

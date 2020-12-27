@@ -7,6 +7,41 @@ import android.widget.EditText
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
+fun TextInputEditText.isPasswordConfirmation(
+    editTextInput: TextInputEditText,
+    errorNullString: String,
+    errorLengthString: String,
+    errorConfirmationString: String,
+    length: Int = 6
+): Boolean {
+    val textInputLayout = this.parent.parent as TextInputLayout
+    textInputLayout.errorIconDrawable = null
+
+    val matches = editTextInput.text.toString().trim() == this.text.toString().trim()
+    return if( this.isPassword(errorNullString, errorLengthString, length) ) {
+        if( editTextInput.isPassword(errorNullString, errorLengthString, length) ) {
+            textInputLayout.error = if( matches ) null else errorConfirmationString
+            matches
+        } else {
+            false
+        }
+    } else {
+        false
+    }
+}
+
+fun TextInputEditText.isPhoneNotNull( errorNullString: String, errorPhoneString: String ): Boolean {
+    val textInputLayout = this.parent.parent as TextInputLayout
+    textInputLayout.errorIconDrawable = null
+    val matches = this.text.toString().trim().length >= 10
+    return if( this.isNotNullOrEmpty(errorNullString) ) {
+        textInputLayout.error = if( matches ) null else errorPhoneString
+        matches
+    } else {
+        false
+    }
+}
+
 fun TextInputEditText.isEmailNotNull( nullString: String, emailString: String ): Boolean {
     val textInputLayout = this.parent.parent as TextInputLayout
     textInputLayout.errorIconDrawable = null

@@ -16,11 +16,14 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
-import com.getmontir.customer.databinding.FragmentAuthLoginBinding
+import com.getmontir.customer.databinding.FragmentAuthRegisterBinding
 import com.getmontir.customer.view.ui.base.GetFragment
 import com.getmontir.customer.viewmodel.AuthViewModel
+import com.getmontir.lib.data.response.ApiErrorValidation
 import com.getmontir.lib.ext.isEmailNotNull
-import com.getmontir.lib.ext.isPassword
+import com.getmontir.lib.ext.isNotNullOrEmpty
+import com.getmontir.lib.ext.isPasswordConfirmation
+import com.getmontir.lib.ext.isPhoneNotNull
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -32,27 +35,27 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-
 /**
  * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
+ * Use the [RegisterFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class LoginFragment : GetFragment() {
+class RegisterFragment : GetFragment() {
 
     companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
          *
-         * @return A new instance of fragment LoginFragment.
+         * @return A new instance of fragment RegisterFragment.
          */
         @JvmStatic
-        fun newInstance() = LoginFragment()
-        private val TAG = LoginFragment::class.java.simpleName
+        fun newInstance() = RegisterFragment()
+
+        private val TAG = RegisterFragment::class.java.simpleName
     }
 
-    private lateinit var binding: FragmentAuthLoginBinding
+    private lateinit var binding: FragmentAuthRegisterBinding
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
@@ -73,10 +76,8 @@ class LoginFragment : GetFragment() {
     private var account: GoogleSignInAccount? = null
 
     @InternalCoroutinesApi
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         // Setup Activity Result Launcher
         resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if( result.resultCode == Activity.RESULT_OK ) {
@@ -92,11 +93,13 @@ class LoginFragment : GetFragment() {
 
                 idEmail = account?.email
 
-                idToken?.let { viewModel.loginGoogle(it, fcmToken ) }
+                idToken?.let {
+                    viewModel.registerGoogle(it, fcmToken)
+                }
             }
         }
 
-        binding = FragmentAuthLoginBinding.inflate( inflater, container, false )
+        binding = FragmentAuthRegisterBinding.inflate( inflater, container, false )
         return binding.root
     }
 
@@ -109,21 +112,21 @@ class LoginFragment : GetFragment() {
         val navHostFragment = NavHostFragment.findNavController(this)
         NavigationUI.setupWithNavController(toolbar, navHostFragment)
 
-        // Setup FCM
+        // Setup Firebase
         setupFCM()
         callbackManager = CallbackManager.Factory.create()
 
-        // Setup view model
-        viewModel.token.observe(viewLifecycleOwner, {
+        // Setup View Model
+        viewModel.token.observe( viewLifecycleOwner, {
             processData("token", it)
         })
         viewModel.user.observe(viewLifecycleOwner, {
             processData("user", it)
         })
 
-        // Setup listener
-        binding.btnSignIn.setOnClickListener {
-            doLogin()
+        // Setup Listener
+        binding.btnSignUp.setOnClickListener {
+            doRegister()
         }
         binding.divider.btnSocialGoogle.setOnClickListener {
             val intent = googleSignInClient.signInIntent
@@ -132,15 +135,17 @@ class LoginFragment : GetFragment() {
         binding.divider.btnSocialFacebook.setOnClickListener {
             binding.divider.btnFacebook.performClick()
         }
+
         binding.divider.btnFacebook.setPermissions("email", "public_profile")
         binding.divider.btnFacebook.fragment = this
         binding.divider.btnFacebook.registerCallback(callbackManager, object: FacebookCallback<LoginResult> {
+
             override fun onSuccess(result: LoginResult?) {
                 val accessToken = result?.accessToken
                 val token = accessToken?.token
                 Timber.tag(TAG).d("facebook:onSuccess $token")
                 if (token != null) {
-                    viewModel.loginFacebook(token, fcmToken)
+                    viewModel.registerFacebook(token, fcmToken)
                 }
             }
 
@@ -154,7 +159,49 @@ class LoginFragment : GetFragment() {
             }
 
         })
-        binding.textActionForgot.setOnClickListener {  }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        Timber.tag(TAG).d("ACTIVITYRESULT:RESULTCODE:: $resultCode")
+        Timber.tag(TAG).d("ACTIVITYRESULT:REQUESTCODE:: $requestCode")
+
+        if( resultCode == Activity.RESULT_OK ) {
+            // Pass the activity result back to the Facebook SDK
+            callbackManager.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    private fun setupFCM() {
+        FirebaseMessaging.getInstance().token
+            .addOnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    return@addOnCompleteListener
+                }
+
+                // Get new Instance ID token
+                fcmToken = task.result.toString()
+                Timber.tag(TAG).d("FCM Token: $fcmToken")
+            }
+    }
+
+    @InternalCoroutinesApi
+    private fun doRegister() {
+        val name = binding.textInputName.text.toString().trim()
+        val phone = binding.textInputPhone.text.toString().trim()
+        val email = binding.textInputEmail.text.toString().trim()
+        val password = binding.textInputPassword.text.toString().trim()
+        val passwordConfirmation = binding.textInputPasswordRepeat.text.toString().trim()
+
+        if(
+            binding.textInputName.isNotNullOrEmpty("Harap isi nama Anda")
+            && binding.textInputPhone.isPhoneNotNull( "Harap isi nomer telepon Anda", "Harap is nomer telepon yang valid" )
+            && binding.textInputEmail.isEmailNotNull("Harap isi email Anda", "Harap isi email yang valid")
+            && binding.textInputPassword.isPasswordConfirmation( binding.textInputPasswordRepeat, "Harap isi kata sandi", "Minimal 6 karakter", "Kata sandi tidak sama" )
+        ) {
+            viewModel.register( name, phone, email, password, passwordConfirmation )
+        }
     }
 
     @InternalCoroutinesApi
@@ -172,69 +219,35 @@ class LoginFragment : GetFragment() {
         }
     }
 
-    @InternalCoroutinesApi
-    private fun doLogin() {
-        val email = binding.textInputEmail.text.toString().trim()
-        val password = binding.textInputPassword.text.toString().trim()
-
-        if(
-            binding.textInputEmail.isEmailNotNull("Harap isi email Anda", "Harap isi email yang valid")
-            && binding.textInputPassword.isPassword("Harap isi kata sandi Anda", "Kata sandi minimal 6 karakter")
-        ) {
-            binding.textLayoutEmail.error = null
-            binding.textLayoutPassword.error = null
-            viewModel.login(email, password)
-        }
-    }
-
-    private fun setupFCM() {
-        FirebaseMessaging.getInstance().token
-            .addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    return@addOnCompleteListener
+    override fun handleHttpValidation(tag: String, e: Exception, data: ApiErrorValidation?) {
+        super.handleHttpValidation(tag, e, data)
+        if( tag == "token" ) {
+            if( data != null ) {
+                if( data.errors.name != null ) {
+                    binding.textLayoutName.error = data.errors.name!!.joinToString {
+                        it + "\n"
+                    }
+                    binding.textInputName.requestFocus()
                 }
-
-                // Get new Instance ID token
-                fcmToken = task.result.toString()
-                Timber.tag(TAG).d("FCM Token: $fcmToken")
+                if( data.errors.phone != null ) {
+                    binding.textLayoutPhone.error = data.errors.phone!!.joinToString {
+                        it + "\n"
+                    }
+                    binding.textInputPhone.requestFocus()
+                }
+                if( data.errors.email != null ) {
+                    binding.textLayoutEmail.error = data.errors.email!!.joinToString {
+                        it + "\n"
+                    }
+                    binding.textInputEmail.requestFocus()
+                }
+                if( data.errors.password != null ) {
+                    binding.textLayoutPassword.error = data.errors.password!!.joinToString {
+                        it + "\n"
+                    }
+                    binding.textInputPassword.requestFocus()
+                }
             }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        Timber.tag(TAG).d("ACTIVITYRESULT:RESULTCODE:: $resultCode")
-        Timber.tag(TAG).d("ACTIVITYRESULT:REQUESTCODE:: $requestCode")
-
-        if( resultCode == Activity.RESULT_OK ) {
-            // Pass the activity result back to the Facebook SDK
-            callbackManager.onActivityResult(requestCode, resultCode, data)
-        }
-    }
-
-    /**
-     * When user credential not found
-     */
-    override fun handleHttpNotFound(tag: String, e: Exception) {
-        if( tag == "token" ) {
-            binding.textLayoutEmail.error = "Pengguna tidak ditemukan"
-        }
-    }
-
-    /**
-     * When user credential wrong
-     */
-    override fun handleHttpBadMethod(tag: String, e: Exception) {
-        if( tag == "token" ) {
-            binding.textLayoutEmail.error = "Email atau kata sandi salah"
-        }
-    }
-
-    /**
-     * When user is banned
-     */
-    override fun handleHttpBadRequest(tag: String, e: Exception) {
-        if( tag == "token" ) {
-            binding.textLayoutEmail.error = "Akun Anda dalam status diblokir"
         }
     }
 }

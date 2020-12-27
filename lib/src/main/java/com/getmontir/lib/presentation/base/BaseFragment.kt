@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.getmontir.lib.R
+import com.getmontir.lib.data.response.ApiErrorValidation
 import com.getmontir.lib.data.response.ResultWrapper
 import com.getmontir.lib.presentation.ErrorAlertType
 import com.getmontir.lib.presentation.dialog.LoaderDialog
@@ -45,13 +46,16 @@ open class BaseFragment: Fragment() {
         when( data ) {
             is ResultWrapper.Success -> processResult(tag, data.data)
             is ResultWrapper.Error.GenericError -> handleGenericError(tag, data.exception)
-            is ResultWrapper.Error.Http.BadRequest -> handleHttpBadRequest(tag, data.e)
-            is ResultWrapper.Error.Http.NotFound -> handleHttpNotFound(tag,data.e)
-            is ResultWrapper.Error.Http.Maintenance -> handleHttpMaintenance(tag,data.e)
-            is ResultWrapper.Error.Http.Unauthorized -> handleHttpUnauthorized(tag,data.e)
-            is ResultWrapper.Error.Http.Validation -> handleHttpValidation(tag,data.e)
-            is ResultWrapper.Error.Http.ServerError -> handleServerError(tag, data.e)
-            is ResultWrapper.Error.Network.NoConnectivity -> handleNetworkNoConnectivity(tag,data.e)
+            is ResultWrapper.Error.Http.BadRequest -> handleHttpBadRequest(tag, data.exception)
+            is ResultWrapper.Error.Http.NotFound -> handleHttpNotFound(tag,data.exception)
+            is ResultWrapper.Error.Http.Maintenance -> handleHttpMaintenance(tag,data.exception)
+            is ResultWrapper.Error.Http.Unauthorized -> handleHttpUnauthorized(tag,data.exception)
+            is ResultWrapper.Error.Http.BadMethod -> handleHttpBadMethod(tag,data.exception)
+            is ResultWrapper.Error.Http.ServerError -> handleServerError(tag, data.exception)
+            is ResultWrapper.Error.Http.Validation -> handleHttpValidation(tag, data.exception,
+                data.data as ApiErrorValidation?
+            )
+            is ResultWrapper.Error.Network.NoConnectivity -> handleNetworkNoConnectivity(tag,data.exception)
             is ResultWrapper.Loading -> {
                 if( data.loading ) {
                     showLoader()
@@ -141,8 +145,8 @@ open class BaseFragment: Fragment() {
         }
     }
 
-    open fun handleHttpValidation( tag: String, e: Exception ) {
-        Timber.tag(tag).d("Invalid Validation")
+    open fun handleHttpBadMethod(tag: String, e: Exception ) {
+        Timber.tag(tag).d("Bad Method")
         activity?.let {
             val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle("Ooopppsss..")
@@ -154,6 +158,10 @@ open class BaseFragment: Fragment() {
             alert.setMessage("Ada input yang belum diisin, harap periksa kembali.")
             alert.show()
         }
+    }
+
+    open fun handleHttpValidation( tag: String, e: Exception, data: ApiErrorValidation? ) {
+        Timber.tag(tag).d("Invalid Validation: $data")
     }
 
     open fun handleServerError(tag: String, e:Exception) {

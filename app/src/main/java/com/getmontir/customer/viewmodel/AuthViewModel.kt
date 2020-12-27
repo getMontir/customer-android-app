@@ -11,7 +11,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class LoginViewModel(
+class AuthViewModel(
     private val repo: AuthRepository
 ): ViewModel() {
 
@@ -62,6 +62,48 @@ class LoginViewModel(
                    _token.value = it
                }
        }
+    }
+
+    @InternalCoroutinesApi
+    fun register(
+        name: String,
+        phone: String,
+        email: String,
+        password: String,
+        passwordConfirmation: String
+    ) {
+       viewModelScope.launch {
+           repo.customerRegister( name, phone, email, password, passwordConfirmation )
+               .collect {
+                   _token.value = it
+               }
+       }
+    }
+
+    @InternalCoroutinesApi
+    fun registerGoogle(
+        token: String,
+        fcmToken: String
+    ) {
+        viewModelScope.launch {
+            repo.customerRegisterSocial( token, fcmToken, "google", "android" )
+                .collect {
+                    _token.value = it
+                }
+        }
+    }
+
+    @InternalCoroutinesApi
+    fun registerFacebook(
+        token: String,
+        fcmToken: String
+    ) {
+        viewModelScope.launch {
+            repo.customerRegisterSocial( token, fcmToken, "facebook", "android" )
+                .collect {
+                    _token.value = it
+                }
+        }
     }
 
     @InternalCoroutinesApi
