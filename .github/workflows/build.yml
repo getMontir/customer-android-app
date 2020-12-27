@@ -56,9 +56,9 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
         working-directory: artifact/download/debug
-#       - name: Upload to Slack
-#         uses: adrey/slack-file-upload-action@master
-#         with:
-#           token: ${{ secrets.SLACK_OAUTH_TOKEN }}
-#           path: artifact/download/app-3.3.${{github.run_number}}.apk
-#           channel: dev-app-customer
+      - name: Upload to Slack
+        uses: adrey/slack-file-upload-action@master
+        with:
+          token: ${{ secrets.SLACK_OAUTH_TOKEN }}
+          path: artifact/download/debug/app-debug.apk
+          channel: dev-app-customer
