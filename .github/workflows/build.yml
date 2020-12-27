@@ -44,6 +44,7 @@ jobs:
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 1
   notification:
+    name: Notification to Slack
     needs: [apk]
     runs-on: ubuntu-latest
     steps:
@@ -51,10 +52,13 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: app-3.3.${{github.run_number}}
-          path: artifact/download/app
-      - name: Upload to Slack
-        uses: adrey/slack-file-upload-action@master
-        with:
-          token: ${{ secrets.SLACK_OAUTH_TOKEN }}
-          path: artifact/download/app
-          channel: dev-app-customer
+          path: artifact/download/debug
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: artifact/download/debug
+#       - name: Upload to Slack
+#         uses: adrey/slack-file-upload-action@master
+#         with:
+#           token: ${{ secrets.SLACK_OAUTH_TOKEN }}
+#           path: artifact/download/app-3.3.${{github.run_number}}.apk
+#           channel: dev-app-customer
