@@ -7,24 +7,20 @@
 
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.getmontir.customer.ui.splash.SplashScreenFragment"
+        android:name="com.getmontir.customer.view.ui.splash.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
-            android:id="@+id/action_splashScreenFragment_to_walkthroughActivity"
-            app:destination="@id/walkthroughActivity" />
-        <action
-            android:id="@+id/action_splashScreenFragment_to_nav_auth"
-            app:destination="@id/nav_auth" />
+            android:id="@+id/action_splashScreenFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
     </fragment>
-    <activity
-        android:id="@+id/walkthroughActivity"
-        android:name="com.getmontir.customer.ui.walkthrough.WalkthroughActivity"
-        android:label="activity_walkthrough"
-        tools:layout="@layout/activity_walkthrough" >
-        <action
-            android:id="@+id/action_walkthroughActivity_to_nav_auth"
-            app:destination="@id/nav_auth" />
-    </activity>
-    <include app:graph="@navigation/nav_auth" />
+    <fragment
+        android:id="@+id/offlineFragment"
+        android:name="com.getmontir.customer.view.ui.base.OfflineFragment"
+        android:label="OfflineFragment" />
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.getmontir.customer.view.ui.base.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" />
 </navigation>

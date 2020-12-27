@@ -31,9 +31,8 @@
         <item name="shapeAppearanceOverlay">?attr/shapeAppearanceLargeComponent</item>
     </style>
 
-    <style name="Theme.GetMontir.Button" parent="Widget.MaterialComponents.Button">
+    <style name="Theme.GetMontir.Button" parent="Widget.MaterialComponents.Button.UnelevatedButton">
         <item name="shapeAppearance">@style/ShapeAppearance.GetMontir.Button</item>
-        <item name="textAllCaps">false</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -42,11 +41,16 @@
         <item name="shapeAppearance">@style/ShapeAppearance.GetMontir.Button</item>
     </style>
 
+    <style name="Theme.GetMontir.Button.OutlinedButton.Primary">
+        <item name="strokeColor">@color/btn_stroke_color_selector</item>
+    </style>
+
     <style name="Theme.GetMontir.Button.OutlinedButton.Icon">
         <item name="android:paddingLeft">18dp</item>
         <item name="iconTint">@color/transparent</item>
         <item name="iconTintMode">add</item>
         <item name="android:textColor">#9098b1</item>
+        <item name="textAllCaps">false</item>
     </style>
 
     <style name="Theme.GetMontir.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
@@ -80,8 +84,18 @@
     </style>
 
     <style name="Widget.GetMontir.Toolbar.White" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
-        <item name="android:background">@color/white_50</item>
+        <item name="android:background">@color/transparent</item>
         <item name="titleTextColor">@color/primaryColor</item>
+    </style>
+
+    <style name="Widget.GetMontir.Toolbar.Inverted" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
+        <item name="android:background">#0B2031</item>
+        <item name="titleTextColor">@color/white_50</item>
+        <item name="homeAsUpIndicator">@drawable/abc_ic_clear_material</item>
+    </style>
+
+    <style name="Widget.GetMontir.ActionButton.Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="actionBarItemBackground">@color/purple_200</item>
     </style>
 
 </resources>

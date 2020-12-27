@@ -3,37 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_auth"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/authChooserFragment">
 
     <fragment
-        android:id="@+id/signInFragment"
-        android:name="com.getmontir.customer.ui.auth.ui.auth.SignInFragment"
-        android:label="Masuk" >
+        android:id="@+id/authChooserFragment"
+        android:name="com.getmontir.customer.view.ui.auth.AuthChooserFragment"
+        android:label=""
+        tools:layout="@layout/fragment_auth_chooser" >
         <action
-            android:id="@+id/action_signInFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment"
-            app:enterAnim="@anim/bottom_sheet_slide_in"
-            app:exitAnim="@anim/bottom_sheet_slide_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out" />
+            android:id="@+id/action_authChooserFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_signInFragment_to_nav_auth_forgot"
-            app:destination="@id/nav_auth_forgot" />
+            android:id="@+id/action_authChooserFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
-        android:id="@+id/signUpFragment"
-        android:name="com.getmontir.customer.ui.auth.ui.auth.SignUpFragment"
-        android:label="Daftar"
-        tools:layout="@layout/sign_up_fragment" >
-        <action
-            android:id="@+id/action_signUpFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out"
-            app:popUpTo="@+id/signInFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-    <include app:graph="@navigation/nav_auth_forgot" />
+        android:id="@+id/loginFragment"
+        android:name="com.getmontir.customer.view.ui.auth.LoginFragment"
+        android:label=""
+        tools:layout="@layout/fragment_auth_login" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.getmontir.customer.view.ui.auth.RegisterFragment"
+        android:label=""
+        tools:layout="@layout/fragment_auth_register" />
 </navigation>

@@ -23,20 +23,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GetMontir">
-        <activity
-            android:name=".ui.auth.ui.forgot.ForgotPasswordActivity"
-            android:parentActivityName=".ui.auth.AuthActivity"
-            android:theme="@style/Theme.GetMontir.ActionBar.White">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.auth.AuthActivity"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <activity android:name="com.facebook.FacebookActivity" android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" />
+        <activity android:name="com.facebook.CustomTabActivity" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
         </activity>
+        <activity android:name=".view.ui.AuthActivity" android:theme="@style/Theme.GetMontir.Auth"/>
         <activity
-            android:name=".ui.auth.AuthActivity"
-            android:theme="@style/Theme.GetMontir.Auth" />
-        <activity android:name=".ui.walkthrough.WalkthroughActivity" />
-        <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name=".view.ui.SplashScreenActivity"
             android:theme="@style/Theme.GetMontir.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

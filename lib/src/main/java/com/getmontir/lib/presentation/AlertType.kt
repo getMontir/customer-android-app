@@ -7,5 +7,6 @@ enum class ErrorAlertType {
     MAINTENANCE,
     UNAUTHORIZED,
     VALIDATION,
-    NO_CONNECTION
+    NO_CONNECTION,
+    INTERNAL_ERROR
 }

@@ -1,16 +1,24 @@
 package com.getmontir.lib.data.network
 
 import android.content.Context
+import com.fasterxml.jackson.core.JsonProcessingException
+import com.fasterxml.jackson.databind.JsonMappingException
+import com.fasterxml.jackson.databind.json.JsonMapper
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.getmontir.lib.data.exception.network.NoConnectivityException
+import com.getmontir.lib.data.response.ApiErrorValidation
 import com.getmontir.lib.data.response.ResultWrapper
+import com.google.gson.JsonParseException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import org.json.JSONObject
 import retrofit2.HttpException
 import retrofit2.Response
+import retrofit2.converter.jackson.JacksonConverterFactory
 import timber.log.Timber
 import java.io.IOException
 import java.net.HttpURLConnection.*
@@ -63,14 +71,19 @@ abstract class ApiResourceBound<ResultType : Any, RequestType : Any>(
                     val apiResponse = createCallAsync()
 
                     if( apiResponse.isSuccessful ) {
+                        Timber.tag(TAG).e("Fetch successful")
                         processResponse(apiResponse.body())?.let {
                             if( withDatabase ) {
                                 saveCallResults(it)
                             }
                             emit(ResultWrapper.Success(it))
                         }
+                    } else {
+                        Timber.tag(TAG).e("Fetch not successful")
+                        throw HttpException(apiResponse)
                     }
                 } else {
+                    Timber.tag(TAG).d("Fetch from local data")
                     emit(ResultWrapper.Success(dbResult))
                 }
             } catch( t: Exception ) {
@@ -79,11 +92,28 @@ abstract class ApiResourceBound<ResultType : Any, RequestType : Any>(
                     is IOException -> emit(ResultWrapper.Error.Network.NoConnectivity(t))
                     is HttpException -> {
                         when(t.code()) {
+                            HTTP_INTERNAL_ERROR -> emit(ResultWrapper.Error.Http.ServerError(t))
                             HTTP_BAD_REQUEST -> emit(ResultWrapper.Error.Http.BadRequest(t))
                             HTTP_NOT_FOUND -> emit(ResultWrapper.Error.Http.NotFound(t))
                             HTTP_UNAUTHORIZED -> emit(ResultWrapper.Error.Http.Unauthorized(t))
-                            HTTP_BAD_METHOD -> emit(ResultWrapper.Error.Http.Validation(t))
+                            HTTP_BAD_METHOD -> emit(ResultWrapper.Error.Http.BadMethod(t))
                             HTTP_UNAVAILABLE -> emit(ResultWrapper.Error.Http.Maintenance(t))
+                            422 -> {
+                                val mapper = JsonMapper.builder().addModule(KotlinModule()).build()
+                                try {
+                                    val dataError = mapper.readValue(t.response()?.errorBody()?.charStream(), ApiErrorValidation::class.java)
+                                    emit(ResultWrapper.Error.Http.Validation(t, dataError))
+                                } catch (e: JsonParseException) {
+                                    Timber.tag(TAG).e(e)
+                                    emit(ResultWrapper.Error.Http.Validation(t, null))
+                                } catch (e: JsonMappingException) {
+                                    Timber.tag(TAG).e(e)
+                                    emit(ResultWrapper.Error.Http.Validation(t, null))
+                                } catch (e: JsonProcessingException) {
+                                    Timber.tag(TAG).e(e)
+                                    emit(ResultWrapper.Error.Http.Validation(t, null))
+                                }
+                            }
                             else -> emit(ResultWrapper.Error.GenericError(t))
                         }
                     }
@@ -108,9 +138,26 @@ fun <S: Any, R: Any> apiResource(
     saveResult: suspend (items: S) -> Unit,
     load: suspend CoroutineScope.() -> S,
     callAsync: suspend CoroutineScope.() -> Response<R>
-) = ApiResourceDelegate<S,R>(
+) = apiResource(
     context,
     true,
+    callResponse,
+    shouldFetch,
+    saveResult,
+    load,
+    callAsync
+)
+fun <S: Any, R: Any> apiResource(
+    context: Context,
+    withDatabase: Boolean,
+    callResponse: (response: R?) -> S?,
+    shouldFetch: Boolean,
+    saveResult: suspend (items: S) -> Unit,
+    load: suspend CoroutineScope.() -> S,
+    callAsync: suspend CoroutineScope.() -> Response<R>
+) = ApiResourceDelegate<S,R>(
+    context,
+    withDatabase,
     callResponse,
     shouldFetch,
     saveResult,

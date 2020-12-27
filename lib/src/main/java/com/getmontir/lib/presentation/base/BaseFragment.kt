@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.getmontir.lib.R
+import com.getmontir.lib.data.response.ApiErrorValidation
 import com.getmontir.lib.data.response.ResultWrapper
 import com.getmontir.lib.presentation.ErrorAlertType
 import com.getmontir.lib.presentation.dialog.LoaderDialog
@@ -45,12 +46,16 @@ open class BaseFragment: Fragment() {
         when( data ) {
             is ResultWrapper.Success -> processResult(tag, data.data)
             is ResultWrapper.Error.GenericError -> handleGenericError(tag, data.exception)
-            is ResultWrapper.Error.Http.BadRequest -> handleHttpBadRequest(tag, data.e)
-            is ResultWrapper.Error.Http.NotFound -> handleHttpNotFound(tag,data.e)
-            is ResultWrapper.Error.Http.Maintenance -> handleHttpMaintenance(tag,data.e)
-            is ResultWrapper.Error.Http.Unauthorized -> handleHttpUnauthorized(tag,data.e)
-            is ResultWrapper.Error.Http.Validation -> handleHttpValidation(tag,data.e)
-            is ResultWrapper.Error.Network.NoConnectivity -> handleNetworkNoConnectivity(tag,data.e)
+            is ResultWrapper.Error.Http.BadRequest -> handleHttpBadRequest(tag, data.exception)
+            is ResultWrapper.Error.Http.NotFound -> handleHttpNotFound(tag,data.exception)
+            is ResultWrapper.Error.Http.Maintenance -> handleHttpMaintenance(tag,data.exception)
+            is ResultWrapper.Error.Http.Unauthorized -> handleHttpUnauthorized(tag,data.exception)
+            is ResultWrapper.Error.Http.BadMethod -> handleHttpBadMethod(tag,data.exception)
+            is ResultWrapper.Error.Http.ServerError -> handleServerError(tag, data.exception)
+            is ResultWrapper.Error.Http.Validation -> handleHttpValidation(tag, data.exception,
+                data.data as ApiErrorValidation?
+            )
+            is ResultWrapper.Error.Network.NoConnectivity -> handleNetworkNoConnectivity(tag,data.exception)
             is ResultWrapper.Loading -> {
                 if( data.loading ) {
                     showLoader()
@@ -140,8 +145,8 @@ open class BaseFragment: Fragment() {
         }
     }
 
-    open fun handleHttpValidation( tag: String, e: Exception ) {
-        Timber.tag(tag).d("Invalid Validation")
+    open fun handleHttpBadMethod(tag: String, e: Exception ) {
+        Timber.tag(tag).d("Bad Method")
         activity?.let {
             val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle("Ooopppsss..")
@@ -155,22 +160,41 @@ open class BaseFragment: Fragment() {
         }
     }
 
-    open fun handleNetworkNoConnectivity(tag: String, e: Exception) {
-        Timber.tag(tag).d("No Connectivity")
+    open fun handleHttpValidation( tag: String, e: Exception, data: ApiErrorValidation? ) {
+        Timber.tag(tag).d("Invalid Validation: $data")
+    }
+
+    open fun handleServerError(tag: String, e:Exception) {
+        Timber.tag(tag).e("Server Error")
         activity?.let {
             val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
                 .setTitle("Ooopppsss..")
-                .setNegativeButton("Tutup") { _, _ ->
-                    onAlertErrorClosed(tag, ErrorAlertType.NO_CONNECTION)
-                }
-                .setPositiveButton("Coba Lagi") { _, _ ->
-                    onRetry(tag)
+                .setPositiveButton("Ok") { _, _ ->
+                    onAlertErrorClosed(tag, ErrorAlertType.INTERNAL_ERROR)
                 }
                 .create()
 
-            alert.setMessage("Tidak ada koneksi internet, harap periksa kembali koneksi internet Anda.")
+            alert.setMessage("Terjadi kesalahan pada dari server (500).")
             alert.show()
         }
+    }
+
+    open fun handleNetworkNoConnectivity(tag: String, e: Exception) {
+        Timber.tag(tag).d("No Connectivity")
+//        activity?.let {
+//            val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
+//                .setTitle("Ooopppsss..")
+//                .setNegativeButton("Tutup") { _, _ ->
+//                    onAlertErrorClosed(tag, ErrorAlertType.NO_CONNECTION)
+//                }
+//                .setPositiveButton("Coba Lagi") { _, _ ->
+//                    onRetry(tag)
+//                }
+//                .create()
+//
+//            alert.setMessage("Tidak ada koneksi internet, harap periksa kembali koneksi internet Anda.")
+//            alert.show()
+//        }
     }
 
     open fun onRetry(tag: String) {
