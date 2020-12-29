@@ -107,6 +107,28 @@ class AuthViewModel(
     }
 
     @InternalCoroutinesApi
+    fun forgotPassword(
+        email: String
+    ) {
+        viewModelScope.launch {
+            repo.customerForgotPassword(email)
+                .collect {
+                    _token.value = it
+                }
+        }
+    }
+
+    @InternalCoroutinesApi
+    fun forgotConfirm(
+        otp: String,
+        token: String
+    ) {
+        viewModelScope.launch {
+            repo.customerForgotPasswordConfirm(otp, token)
+        }
+    }
+
+    @InternalCoroutinesApi
     fun profile() {
         viewModelScope.launch {
             repo.profile()

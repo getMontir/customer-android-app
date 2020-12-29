@@ -91,6 +91,27 @@ interface APIService {
         @Field("device") device: String
     ): Response<ApiResponse<String>>
 
+    @FormUrlEncoded
+    @POST("customer/password/forgot")
+    suspend fun customerForgotPasswordAsync(
+        @Field("email") email: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("customer/password/forgot/confirm")
+    suspend fun customerForgotPasswordConfirmAsync(
+        @Field("otp") otp: String,
+        @Field("token") token: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("customer/password/change")
+    suspend fun customerForgotChangePasswordAsync(
+        @Field("token") token: String,
+        @Field("password") password: String,
+        @Field("password_confirmation") passwordConfirmation: String
+    ): Response<ApiResponse<String>>
+
     @POST("profile")
     suspend fun profileUserAsync(): Response<ApiResponse<UserDto>>
 

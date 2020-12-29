@@ -11,6 +11,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -154,7 +155,10 @@ class LoginFragment : GetFragment() {
             }
 
         })
-        binding.textActionForgot.setOnClickListener {  }
+        binding.textActionForgot.setOnClickListener {
+            val action = LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
+            findNavController().navigate(action)
+        }
     }
 
     @InternalCoroutinesApi

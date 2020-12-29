@@ -93,7 +93,9 @@ class AuthChooserFragment : GetFragment() {
         val toolbar: Toolbar = binding.toolbar
         val appBarConfiguration = AppBarConfiguration(setOf(
             R.id.authChooserFragment,
-            R.id.loginFragment
+            R.id.loginFragment,
+            R.id.registerFragment,
+            R.id.forgotPasswordFragment
         ))
         val navHostFragment = NavHostFragment.findNavController(this)
         NavigationUI.setupWithNavController(toolbar, navHostFragment, appBarConfiguration)
