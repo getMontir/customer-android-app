@@ -52,14 +52,14 @@
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Buat Akun" />
+            android:text="@string/button_chooser_register" />
 
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             style="@style/Theme.GetMontir.Button.OutlinedButton.Primary"
-            android:text="Masuk"/>
+            android:text="@string/button_chooser_login"/>
 
     </LinearLayout>
 

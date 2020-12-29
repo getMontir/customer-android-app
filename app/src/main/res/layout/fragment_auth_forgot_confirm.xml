@@ -40,7 +40,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Verifikasi Ganti Kata Sandi"
+                android:text="@string/forgot_confirm_title"
                 style="@style/TextAppearance.GetMontir.Headline5"
                 android:textColor="@color/secondaryColor"
                 android:layout_marginTop="30dp"/>
@@ -48,7 +48,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Masukan 4 digit kode yang telah dikirim ke email Anda."
+                android:text="@string/forgot_confirm_description"
                 style="@style/TextAppearance.GetMontir.Body1"
                 android:textColor="@color/blackBlue900"
                 android:layout_marginTop="12dp"/>
@@ -79,7 +79,7 @@
                 android:id="@+id/textResendCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kirim ulang kode konfirmasi"
+                android:text="@string/field_resend_otp"
                 android:layout_gravity="center"
                 style="@style/TextAppearance.GetMontir.Caption"
                 android:textColor="#385084"
@@ -90,7 +90,7 @@
                 android:id="@+id/btnSend"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Verifikasi"
+                android:text="@string/button_forgot_confirm"
                 android:layout_marginTop="40dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"

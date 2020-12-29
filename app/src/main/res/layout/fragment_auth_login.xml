@@ -77,7 +77,7 @@
                         android:id="@+id/textLayoutEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Email"
+                        android:hint="@string/field_email"
                         android:layout_marginBottom="12dp"
                         app:errorEnabled="true">
 
@@ -93,7 +93,7 @@
                         android:id="@+id/textLayoutPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Kata Sandi"
+                        android:hint="@string/field_password"
                         android:layout_marginBottom="12dp"
                         app:endIconMode="password_toggle"
                         app:errorEnabled="true">
@@ -110,13 +110,13 @@
                         android:id="@+id/btnSignIn"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:text="Login"/>
+                        android:text="@string/button_login"/>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/textActionForgot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lupa Kata Sandi?"
+                        android:text="@string/forgot_email_title"
                         android:layout_gravity="center"
                         style="@style/TextAppearance.GetMontir.Caption"
                         android:textColor="#385084"

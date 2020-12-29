@@ -40,7 +40,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Buat Kata Sandi Baru"
+                android:text="@string/forgot_change_title"
                 style="@style/TextAppearance.GetMontir.Headline5"
                 android:textColor="@color/secondaryColor"
                 android:layout_marginTop="30dp"/>
@@ -48,8 +48,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kata sandi baru Anda harus berbeda dari kata sandi yang digunakan sebelumnya.
-"
+                android:text="@string/forgot_change_description"
                 style="@style/TextAppearance.GetMontir.Body1"
                 android:textColor="@color/blackBlue900"
                 android:layout_marginTop="12dp"/>
@@ -58,7 +57,7 @@
                 android:id="@+id/textLayoutPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Kata Sandi"
+                android:hint="@string/field_password"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="12dp"
                 app:endIconMode="password_toggle"
@@ -76,7 +75,7 @@
                 android:id="@+id/textLayoutPasswordRepeat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ulangi Kata Sandi"
+                android:hint="@string/field_password_confirmation"
                 android:layout_marginBottom="12dp"
                 app:endIconMode="password_toggle"
                 app:errorEnabled="true">
@@ -93,7 +92,7 @@
                 android:id="@+id/btnSend"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Ganti Kata Sandi"
+                android:text="@string/button_forgot_change"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"

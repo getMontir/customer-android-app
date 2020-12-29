@@ -20,7 +20,7 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="atau"
+                android:text="@string/divider_social"
                 style="@style/TextAppearance.GetMontir.Body1"
                 android:textColor="#9098b1"/>
 
@@ -61,7 +61,7 @@
                 android:layout_height="60dp"
                 style="@style/Theme.GetMontir.Button.OutlinedButton.Icon"
                 app:icon="@drawable/ic_social_google"
-                android:text="Masuk dengan Google" />
+                android:text="@string/button_social_register_google" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -79,7 +79,7 @@
                     android:layout_height="60dp"
                     style="@style/Theme.GetMontir.Button.OutlinedButton.Icon"
                     app:icon="@drawable/ic_social_facebook"
-                    android:text="Masuk dengan Facebook" />
+                    android:text="@string/button_social_register_facebook" />
 
             </FrameLayout>
 

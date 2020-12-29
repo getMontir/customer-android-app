@@ -27,7 +27,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update Tersedia"
+            android:text="@string/update_title"
             style="@style/TextAppearance.GetMontir.Headline5"
             android:layout_marginTop="32dp"
             android:layout_gravity="center"/>
@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Perbarui aplikasi getMontir untuk mendapatkan kenyamanan dalam menggunakan aplikasi ini."
+            android:text="@string/update_description"
             android:gravity="center"
             android:layout_marginTop="10dp"
             style="@style/TextAppearance.GetMontir.Subtitle1"/>
@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="40dp"
-            android:text="Perbarui" />
+            android:text="@string/button_update" />
 
     </LinearLayout>
 

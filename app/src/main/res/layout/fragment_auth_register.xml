@@ -78,7 +78,7 @@
                         android:id="@+id/textLayoutName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Nama Lengkap"
+                        android:hint="@string/field_name"
                         android:layout_marginBottom="12dp"
                         app:errorEnabled="true">
 
@@ -94,7 +94,7 @@
                         android:id="@+id/textLayoutPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="No. Telepon"
+                        android:hint="@string/field_phone"
                         android:layout_marginBottom="12dp"
                         app:errorEnabled="true">
 
@@ -110,7 +110,7 @@
                         android:id="@+id/textLayoutEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Email"
+                        android:hint="@string/field_email"
                         android:layout_marginBottom="12dp"
                         app:errorEnabled="true">
 
@@ -126,7 +126,7 @@
                         android:id="@+id/textLayoutPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Kata Sandi"
+                        android:hint="@string/field_password"
                         android:layout_marginBottom="12dp"
                         app:endIconMode="password_toggle"
                         app:errorEnabled="true">
@@ -143,7 +143,7 @@
                         android:id="@+id/textLayoutPasswordRepeat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Ulangi Kata Sandi"
+                        android:hint="@string/field_password_confirmation"
                         android:layout_marginBottom="12dp"
                         app:endIconMode="password_toggle"
                         app:errorEnabled="true">
@@ -160,7 +160,7 @@
                         android:id="@+id/btnSignUp"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:text="Daftar"/>
+                        android:text="@string/button_register"/>
 
                 </LinearLayout>
 

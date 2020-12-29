@@ -27,7 +27,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tidak Ada Koneksi"
+            android:text="@string/offline_title"
             style="@style/TextAppearance.GetMontir.Headline5"
             android:layout_marginTop="32dp"
             android:layout_gravity="center"/>
@@ -35,7 +35,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tidak ada koneksi internet. Coba lagi ketika sudah terhubung dengan internet"
+            android:text="@string/offline_description"
             android:gravity="center"
             android:layout_marginTop="10dp"
             style="@style/TextAppearance.GetMontir.Subtitle1"/>
@@ -54,7 +54,7 @@
             android:id="@+id/btnTryAgain"
             android:layout_width="0dp"
             android:layout_height="60dp"
-            android:text="Coba Lagi"
+            android:text="@string/button_retry"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btnClose"
             app:layout_constraintBottom_toBottomOf="parent" />
@@ -64,7 +64,7 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             style="@style/Theme.GetMontir.Button.OutlinedButton"
-            android:text="Tutup"
+            android:text="@string/button_close"
             app:layout_constraintEnd_toStartOf="@id/btnTryAgain"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
