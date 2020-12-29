@@ -7,34 +7,21 @@
     <string name="fb_login_protocol_scheme" translatable="false">fb254994588228342</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 
-    <!-- WALKTHROUGH ACTIVITY -->
-    <string name="walkthrough_button_finish">Ok, Let\'s Go!</string>
-
-    <!-- AUTH ACTIVITY -->
-    <string name="register_title">Register</string>
-    <string name="sign_in_title">Login</string>
-    <string name="forgot_email_title">Forgot Password?</string>
-    <string name="forgot_email_description">Enter the email address associated with your account. We will send you an OTP code to use to change your password.</string>
-    <string name="forgot_confirm_title">Verification</string>
-    <string name="forgot_confirm_description">Enter the 4 digit code that has been sent to your email.</string>
-    <string name="forgot_change_title">Create New Password</string>
-    <string name="forgot_change_description">Your new password must be different from the password that was used previously.</string>
-    <string name="walkthrough_third_description">We provide a faster service with a home service system or a mechanic comes directly to the house.</string>
-    <string name="walkthrough_third_title">Faster</string>
-    <string name="walkthrough_second_description">With an easy ordering system and customer service that is ready to help you servicing your vehicle.</string>
-    <string name="walkthrough_second_title">Easier</string>
-    <string name="walkthrough_first_description">With service down to the smallest detail and also spare parts that are more complete, make you calm in servicing your vehicle</string>
-    <string name="walkthrough_first_title">More Complete</string>
-    <string name="walkthrough_button_skip">Skip</string>
-    <string name="walkthrough_button_next">Next</string>
-
-    <!-- OFFLINE -->
-    <string name="offline_title">No Connectivity</string>
-    <string name="offline_description">There is no internet connection. Try again when connected to the internet</string>
-
-    <!-- UPDATE -->
-    <string name="update_title">Updates Available</string>
-    <string name="update_description">Please update the getMontir application to get comfortable using this application.</string>
+    <!-- ERROR -->
+    <string name="error_field_name_empty">Please fill with your name</string>
+    <string name="error_field_phone_empty">Please fill with your phone number</string>
+    <string name="error_field_phone_length">Please fill with valid phone number</string>
+    <string name="error_field_email_empty">Please fill with your email</string>
+    <string name="error_field_email_invalid">Please fill with valid email address</string>
+    <string name="error_field_password_empty">Please fill password</string>
+    <string name="error_field_password_length">Password min 6 character</string>
+    <string name="error_field_password_confirmation">Password not same</string>
+    <string name="error_field_password_confirmation_empty">Please input again your password</string>
+    <string name="error_field_otp_empty">Please fill with your OTP code</string>
+    <string name="error_field_agree_unchecked">You must agree for registering</string>
+    <string name="error_auth_login_wrong">Incorrect email or password</string>
+    <string name="error_auth_login_not_found">Customer not found</string>
+    <string name="error_auth_login_block">Your account is in a blocked status</string>
 
     <!-- FIELD -->
     <string name="field_name">Name</string>
@@ -63,4 +50,33 @@
 
     <!-- DIVIDER -->
     <string name="divider_social">or</string>
+
+    <!-- WALKTHROUGH ACTIVITY -->
+    <string name="walkthrough_button_finish">Ok, Let\'s Go!</string>
+
+    <!-- AUTH ACTIVITY -->
+    <string name="register_title">Register</string>
+    <string name="sign_in_title">Login</string>
+    <string name="forgot_email_title">Forgot Password?</string>
+    <string name="forgot_email_description">Enter the email address associated with your account. We will send you an OTP code to use to change your password.</string>
+    <string name="forgot_confirm_title">Verification</string>
+    <string name="forgot_confirm_description">Enter the 4 digit code that has been sent to your email.</string>
+    <string name="forgot_change_title">Create New Password</string>
+    <string name="forgot_change_description">Your new password must be different from the password that was used previously.</string>
+    <string name="walkthrough_third_description">We provide a faster service with a home service system or a mechanic comes directly to the house.</string>
+    <string name="walkthrough_third_title">Faster</string>
+    <string name="walkthrough_second_description">With an easy ordering system and customer service that is ready to help you servicing your vehicle.</string>
+    <string name="walkthrough_second_title">Easier</string>
+    <string name="walkthrough_first_description">With service down to the smallest detail and also spare parts that are more complete, make you calm in servicing your vehicle</string>
+    <string name="walkthrough_first_title">More Complete</string>
+    <string name="walkthrough_button_skip">Skip</string>
+    <string name="walkthrough_button_next">Next</string>
+
+    <!-- OFFLINE -->
+    <string name="offline_title">No Connectivity</string>
+    <string name="offline_description">There is no internet connection. Try again when connected to the internet</string>
+
+    <!-- UPDATE -->
+    <string name="update_title">Updates Available</string>
+    <string name="update_description">Please update the getMontir application to get comfortable using this application.</string>
 </resources>

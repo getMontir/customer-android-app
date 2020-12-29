@@ -17,6 +17,7 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
+import com.getmontir.customer.R
 import com.getmontir.customer.databinding.FragmentAuthLoginBinding
 import com.getmontir.customer.view.ui.base.GetFragment
 import com.getmontir.customer.viewmodel.AuthViewModel
@@ -32,7 +33,6 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
-
 
 /**
  * A simple [Fragment] subclass.
@@ -122,6 +122,10 @@ class LoginFragment : GetFragment() {
             processData("user", it)
         })
 
+        // Setup view
+        binding.divider.btnSocialFacebook.text = resources.getString(R.string.button_social_login_facebook)
+        binding.divider.btnSocialGoogle.text = resources.getString(R.string.button_social_login_google)
+
         // Setup listener
         binding.btnSignIn.setOnClickListener {
             doLogin()
@@ -182,8 +186,14 @@ class LoginFragment : GetFragment() {
         val password = binding.textInputPassword.text.toString().trim()
 
         if(
-            binding.textInputEmail.isEmailNotNull("Harap isi email Anda", "Harap isi email yang valid")
-            && binding.textInputPassword.isPassword("Harap isi kata sandi Anda", "Kata sandi minimal 6 karakter")
+            binding.textInputEmail.isEmailNotNull(
+                getString(R.string.error_field_email_empty),
+                getString(R.string.error_field_email_invalid)
+            )
+            && binding.textInputPassword.isPassword(
+                getString(R.string.error_field_password_empty),
+                getString(R.string.error_field_password_length)
+            )
         ) {
             binding.textLayoutEmail.error = null
             binding.textLayoutPassword.error = null
@@ -220,7 +230,7 @@ class LoginFragment : GetFragment() {
      */
     override fun handleHttpNotFound(tag: String, e: Exception) {
         if( tag == "token" ) {
-            binding.textLayoutEmail.error = "Pengguna tidak ditemukan"
+            binding.textLayoutEmail.error = getString(R.string.error_auth_login_not_found)
         }
     }
 
@@ -229,7 +239,7 @@ class LoginFragment : GetFragment() {
      */
     override fun handleHttpBadMethod(tag: String, e: Exception) {
         if( tag == "token" ) {
-            binding.textLayoutEmail.error = "Email atau kata sandi salah"
+            binding.textLayoutEmail.error = getString(R.string.error_auth_login_wrong)
         }
     }
 
@@ -238,7 +248,7 @@ class LoginFragment : GetFragment() {
      */
     override fun handleHttpBadRequest(tag: String, e: Exception) {
         if( tag == "token" ) {
-            binding.textLayoutEmail.error = "Akun Anda dalam status diblokir"
+            binding.textLayoutEmail.error = getString(R.string.error_auth_login_block)
         }
     }
 }

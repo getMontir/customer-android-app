@@ -44,4 +44,18 @@
     <string name="button_update">Perbarui</string>
     <string name="update_title">Pembaruan Tersedia</string>
     <string name="update_description">Perbarui aplikasi getMontir untuk mendapatkan kenyamanan dalam menggunakan aplikasi ini.</string>
+    <string name="error_field_name_empty">Harap isi nama Anda</string>
+    <string name="error_field_phone_empty">Harap isi nomer telepon Anda</string>
+    <string name="error_field_phone_length">Harap isi nomer telepon yang valid</string>
+    <string name="error_field_email_empty">Harap isi email Anda</string>
+    <string name="error_field_email_invalid">Harap isi email yang valid</string>
+    <string name="error_field_password_empty">Harap isi kata sandi Anda</string>
+    <string name="error_field_password_length">Kata sandi minimal 6 karakter</string>
+    <string name="error_field_password_confirmation">Kata sandi tidak sama</string>
+    <string name="error_field_password_confirmation_empty">Harap isi kembali kata sandi Anda</string>
+    <string name="error_field_otp_empty">Harap isi kode konfirmasi</string>
+    <string name="error_field_agree_unchecked">Anda harus setuju jika ingin mendaftar</string>
+    <string name="error_auth_login_wrong">Email atau kata sandi salah</string>
+    <string name="error_auth_login_not_found">Pengguna tidak ditemukan</string>
+    <string name="error_auth_login_block">Akun Anda dalam status terblokir</string>
 </resources>

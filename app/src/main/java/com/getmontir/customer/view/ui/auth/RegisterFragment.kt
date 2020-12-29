@@ -16,14 +16,12 @@ import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
+import com.getmontir.customer.R
 import com.getmontir.customer.databinding.FragmentAuthRegisterBinding
 import com.getmontir.customer.view.ui.base.GetFragment
 import com.getmontir.customer.viewmodel.AuthViewModel
 import com.getmontir.lib.data.response.ApiErrorValidation
-import com.getmontir.lib.ext.isEmailNotNull
-import com.getmontir.lib.ext.isNotNullOrEmpty
-import com.getmontir.lib.ext.isPasswordConfirmation
-import com.getmontir.lib.ext.isPhoneNotNull
+import com.getmontir.lib.ext.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -194,13 +192,32 @@ class RegisterFragment : GetFragment() {
         val password = binding.textInputPassword.text.toString().trim()
         val passwordConfirmation = binding.textInputPasswordRepeat.text.toString().trim()
 
-        if(
-            binding.textInputName.isNotNullOrEmpty("Harap isi nama Anda")
-            && binding.textInputPhone.isPhoneNotNull( "Harap isi nomer telepon Anda", "Harap is nomer telepon yang valid" )
-            && binding.textInputEmail.isEmailNotNull("Harap isi email Anda", "Harap isi email yang valid")
-            && binding.textInputPassword.isPasswordConfirmation( binding.textInputPasswordRepeat, "Harap isi kata sandi", "Minimal 6 karakter", "Kata sandi tidak sama" )
-        ) {
-            viewModel.register( name, phone, email, password, passwordConfirmation )
+        resources.apply {
+            if(
+                binding.textInputName.isNotNullOrEmpty(
+                    getString(R.string.error_field_name_empty)
+                )
+                && binding.textInputPhone.isPhoneNotNull(
+                    getString(R.string.error_field_phone_empty),
+                    getString(R.string.error_field_phone_length)
+                )
+                && binding.textInputEmail.isEmailNotNull(
+                    getString(R.string.error_field_email_empty),
+                    getString(R.string.error_field_email_invalid)
+                )
+                && binding.textInputPassword.isPasswordConfirmation(
+                    binding.textInputPasswordRepeat,
+                    getString(R.string.error_field_password_empty),
+                    getString(R.string.error_field_password_confirmation_empty),
+                    getString(R.string.error_field_password_length),
+                    getString(R.string.error_field_password_confirmation)
+                )
+                && binding.textInputAgree.isMustChecked(
+                    getString(R.string.error_field_agree_unchecked)
+                )
+            ) {
+                viewModel.register( name, phone, email, password, passwordConfirmation )
+            }
         }
     }
 

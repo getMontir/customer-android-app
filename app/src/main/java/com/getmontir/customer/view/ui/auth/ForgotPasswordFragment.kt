@@ -75,7 +75,10 @@ class ForgotPasswordFragment : GetFragment() {
 
     @InternalCoroutinesApi
     private fun doReset() {
-        if( binding.textInputEmail.isEmailNotNull("Harap isi email Anda", "Harap masukan alamat email yang valid") ) {
+        if( binding.textInputEmail.isEmailNotNull(
+            getString(R.string.error_field_email_empty),
+            getString(R.string.error_field_email_invalid)
+        ) ) {
             viewModel.forgotPassword(binding.textInputEmail.text.toString().trim())
         }
     }

@@ -82,8 +82,10 @@ class ForgotChangePasswordFragment : GetFragment() {
         if(
             binding.textInputPassword.isPasswordConfirmation(
                 binding.textInputPasswordRepeat,
-                "Harap isi kata sandi", "Minimal 6 karakter",
-                "Kata sandi tidak sama"
+                getString(R.string.error_field_password_empty),
+                getString(R.string.error_field_password_confirmation_empty),
+                getString(R.string.error_field_password_length),
+                getString(R.string.error_field_password_confirmation)
             )
         ) {
             sessionManager.forgotToken?.let {

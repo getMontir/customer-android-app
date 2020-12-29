@@ -112,8 +112,8 @@ class ForgotConfirmFragment : GetFragment() {
     private fun doConfirm() {
         if( binding.textOtp.isNotNullAndMinLength(
                 4,
-                "Harap isi terlebih dahulu",
-                "Harap isi terlebih dahulu"
+                getString(R.string.error_field_otp_empty),
+                getString(R.string.error_field_otp_empty),
             )
         ) {
             sessionManager.forgotToken?.let {

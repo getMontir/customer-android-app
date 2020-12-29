@@ -3,6 +3,7 @@ package com.getmontir.lib.ext
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
+import android.widget.CheckBox
 import android.widget.EditText
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -10,6 +11,7 @@ import com.google.android.material.textfield.TextInputLayout
 fun TextInputEditText.isPasswordConfirmation(
     editTextInput: TextInputEditText,
     errorNullString: String,
+    errorConfirmationNullString: String,
     errorLengthString: String,
     errorConfirmationString: String,
     length: Int = 6
@@ -19,7 +21,7 @@ fun TextInputEditText.isPasswordConfirmation(
 
     val matches = editTextInput.text.toString().trim() == this.text.toString().trim()
     return if( this.isPassword(errorNullString, errorLengthString, length) ) {
-        if( editTextInput.isPassword(errorNullString, errorLengthString, length) ) {
+        if( editTextInput.isPassword(errorConfirmationNullString, errorLengthString, length) ) {
             textInputLayout.error = if( matches ) null else errorConfirmationString
             matches
         } else {
@@ -112,4 +114,22 @@ fun EditText.onChange(cb: (String) -> Unit) {
         }
 
     })
+}
+
+fun CheckBox.isMustChecked( errorString: String ): Boolean {
+    this.onChange {
+        if( it ) {
+            this.error = null
+        } else {
+            this.error = errorString
+        }
+    }
+
+    return this.isChecked
+}
+
+fun CheckBox.onChange(cb: (Boolean) -> Unit) {
+    this.setOnCheckedChangeListener { _, isChecked ->
+        cb(isChecked)
+    }
 }
