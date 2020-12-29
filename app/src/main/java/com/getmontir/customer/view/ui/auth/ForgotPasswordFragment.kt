@@ -61,18 +61,15 @@ class ForgotPasswordFragment : GetFragment() {
 
         // Setup listener
         binding.btnSend.setOnClickListener {
-            // doReset()
-            findNavController().navigate(R.id.forgotConfirmFragment)
+             doReset()
         }
     }
 
     override fun processResult(tag: String, data: Any?) {
         super.processResult(tag, data)
         if( tag == "token" ) {
-            val token = data as String
-            sessionManager.token = token
-
             // Show fragment verification
+            showConfirm()
         }
     }
 
@@ -81,5 +78,10 @@ class ForgotPasswordFragment : GetFragment() {
         if( binding.textInputEmail.isEmailNotNull("Harap isi email Anda", "Harap masukan alamat email yang valid") ) {
             viewModel.forgotPassword(binding.textInputEmail.text.toString().trim())
         }
+    }
+
+    private fun showConfirm() {
+        val action = ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToForgotConfirmFragment()
+        findNavController().navigate(action)
     }
 }

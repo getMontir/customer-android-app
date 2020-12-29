@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.getmontir.customer.R
 import com.getmontir.customer.databinding.FragmentAuthForgotConfirmBinding
@@ -89,6 +90,7 @@ class ForgotConfirmFragment : GetFragment() {
         super.processResult(tag, data)
         if( tag == "token" ) {
             // If confirm load confirm password
+            showChangePassword()
         }
 
         if( tag == "code" ) {
@@ -121,5 +123,10 @@ class ForgotConfirmFragment : GetFragment() {
                 )
             }
         }
+    }
+
+    private fun showChangePassword() {
+        val action = ForgotConfirmFragmentDirections.actionForgotConfirmFragmentToForgotChangePasswordFragment()
+        findNavController().navigate(action)
     }
 }

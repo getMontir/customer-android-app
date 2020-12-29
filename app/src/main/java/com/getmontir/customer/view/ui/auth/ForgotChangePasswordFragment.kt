@@ -73,7 +73,7 @@ class ForgotChangePasswordFragment : GetFragment() {
 
         if( tag == "forgot" ) {
             // Show logout
-            findNavController().popBackStack(R.id.loginFragment, true)
+            showLoginFragment()
         }
     }
 
@@ -94,5 +94,9 @@ class ForgotChangePasswordFragment : GetFragment() {
                 )
             }
         }
+    }
+
+    private fun showLoginFragment() {
+        findNavController().popBackStack(R.id.loginFragment, false)
     }
 }

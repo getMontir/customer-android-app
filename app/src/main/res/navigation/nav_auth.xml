@@ -5,6 +5,22 @@
     android:id="@+id/nav_auth"
     app:startDestination="@id/authChooserFragment">
 
+    <action
+        android:id="@+id/action_forgotPasswordFragment_to_forgotConfirmFragment"
+        app:destination="@id/forgotConfirmFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+
+    <action
+        android:id="@+id/action_forgotConfirmFragment_to_forgotChangePasswordFragment"
+        app:destination="@id/forgotChangePasswordFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+
     <fragment
         android:id="@+id/authChooserFragment"
         android:name="com.getmontir.customer.view.ui.auth.AuthChooserFragment"
@@ -58,4 +74,9 @@
         android:name="com.getmontir.customer.view.ui.auth.ForgotConfirmFragment"
         android:label=""
         tools:layout="@layout/fragment_auth_forgot_confirm" />
+    <fragment
+        android:id="@+id/forgotChangePasswordFragment"
+        android:name="com.getmontir.customer.view.ui.auth.ForgotChangePasswordFragment"
+        android:label=""
+        tools:layout="@layout/fragment_auth_forgot_change" />
 </navigation>
