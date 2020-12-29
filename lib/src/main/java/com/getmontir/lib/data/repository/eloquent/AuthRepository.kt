@@ -211,12 +211,10 @@ class AuthRepository(
         override suspend fun saveCallResults(items: String) {
             sessionManager.forgotEmail = null
             sessionManager.forgotToken = null
-            sessionManager.token = items
-            sessionManager.isLoggedIn = true
         }
 
         override suspend fun loadFromDb(): String? {
-            return sessionManager.token
+            return null
         }
 
         override suspend fun createCallAsync(): Response<ApiResponse<String>> {
