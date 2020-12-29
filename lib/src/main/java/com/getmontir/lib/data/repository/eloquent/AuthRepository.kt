@@ -154,11 +154,12 @@ class AuthRepository(
         }
 
         override suspend fun saveCallResults(items: String) {
-            sessionManager.token = items
+            sessionManager.forgotEmail = email
+            sessionManager.forgotToken = items
         }
 
         override suspend fun loadFromDb(): String? {
-            return sessionManager.token
+            return sessionManager.forgotToken
         }
 
         override suspend fun createCallAsync(): Response<ApiResponse<String>> {
@@ -181,11 +182,11 @@ class AuthRepository(
         }
 
         override suspend fun saveCallResults(items: String) {
-            sessionManager.token = items
+            sessionManager.forgotToken = items
         }
 
         override suspend fun loadFromDb(): String? {
-            return sessionManager.token
+            return sessionManager.forgotToken
         }
 
         override suspend fun createCallAsync(): Response<ApiResponse<String>> {
@@ -208,6 +209,8 @@ class AuthRepository(
         }
 
         override suspend fun saveCallResults(items: String) {
+            sessionManager.forgotEmail = null
+            sessionManager.forgotToken = null
             sessionManager.token = items
             sessionManager.isLoggedIn = true
         }
@@ -218,6 +221,31 @@ class AuthRepository(
 
         override suspend fun createCallAsync(): Response<ApiResponse<String>> {
             return api.customerForgotChangePasswordAsync(token, password, passwordConfirmation)
+        }
+    }.build()
+
+    @InternalCoroutinesApi
+    fun customerForgotPasswordResend(
+        email: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.forgotToken = items
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.forgotToken
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.customerForgotPasswordResendAsync(email)
         }
     }.build()
 

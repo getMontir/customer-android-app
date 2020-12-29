@@ -17,6 +17,10 @@ class SessionManager(private val context: Context, private val prefName: String)
 
     var token: String? by stringPref( prefName, session.token, null )
 
+    var forgotEmail: String? by stringPref( prefName, session.forgotEmail, null )
+
+    var forgotToken: String? by stringPref( prefName, session.forgotToken, null )
+
     var userId: String? by stringPref( prefName, session.userId, null )
 
     var userImage: String? by stringPref( prefName, session.userImage, null )

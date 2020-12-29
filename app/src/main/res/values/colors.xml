@@ -85,6 +85,10 @@
     <color name="dotInactiveColor">#33e4283d</color>
     <color name="dotActiveColor">@color/secondaryColor</color>
 
+    <color name="line_selected">@color/primaryColor</color>
+    <color name="line_focused">#338f92a1</color>
+    <color name="line_default">#C5CAE9</color>
+
     <!-- ARRAY -->
     <array name="array_dot_active">
         <item>@color/dotActiveColor</item>

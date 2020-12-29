@@ -48,4 +48,14 @@
         android:name="com.getmontir.customer.view.ui.auth.ForgotPasswordFragment"
         android:label=""
         tools:layout="@layout/fragment_auth_forgot_password" />
+    <fragment
+        android:id="@+id/offlineFragment2"
+        android:name="com.getmontir.customer.view.ui.base.OfflineFragment"
+        android:label=""
+        tools:layout="@layout/fragment_offline" />
+    <fragment
+        android:id="@+id/forgotConfirmFragment"
+        android:name="com.getmontir.customer.view.ui.auth.ForgotConfirmFragment"
+        android:label=""
+        tools:layout="@layout/fragment_auth_forgot_confirm" />
 </navigation>

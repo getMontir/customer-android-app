@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.getmontir.customer.R
 import com.getmontir.customer.databinding.FragmentAuthForgotPasswordBinding
@@ -54,13 +55,14 @@ class ForgotPasswordFragment : GetFragment() {
         NavigationUI.setupWithNavController(toolbar, navHostFragment)
 
         // Setup view model
-        viewModel.token.observe(viewLifecycleOwner, {
+        viewModel.forgotToken.observe(viewLifecycleOwner, {
             processData("token", it)
         })
 
         // Setup listener
         binding.btnSend.setOnClickListener {
-            doReset()
+            // doReset()
+            findNavController().navigate(R.id.forgotConfirmFragment)
         }
     }
 

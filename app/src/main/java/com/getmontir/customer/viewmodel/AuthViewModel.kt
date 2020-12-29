@@ -18,6 +18,12 @@ class AuthViewModel(
     private val _token = MutableLiveData<ResultWrapper<String>>()
     val token: LiveData<ResultWrapper<String>> get() = _token
 
+    private val _forgotToken = MutableLiveData<ResultWrapper<String>>()
+    val forgotToken: LiveData<ResultWrapper<String>> get() = _forgotToken
+
+    private val _resendForgotToken = MutableLiveData<ResultWrapper<String>>()
+    val resendForgotToken: LiveData<ResultWrapper<String>> get() = _resendForgotToken
+
     private val _user = MutableLiveData<ResultWrapper<UserEntity>>()
     val user: LiveData<ResultWrapper<UserEntity>> get() = _user
 
@@ -113,7 +119,7 @@ class AuthViewModel(
         viewModelScope.launch {
             repo.customerForgotPassword(email)
                 .collect {
-                    _token.value = it
+                    _forgotToken.value = it
                 }
         }
     }
@@ -125,6 +131,21 @@ class AuthViewModel(
     ) {
         viewModelScope.launch {
             repo.customerForgotPasswordConfirm(otp, token)
+                .collect {
+                    _forgotToken.value = it
+                }
+        }
+    }
+
+    @InternalCoroutinesApi
+    fun resendForgotCode(
+        email: String
+    ) {
+        viewModelScope.launch {
+            repo.customerForgotPasswordResend(email)
+                .collect {
+                    _resendForgotToken.value = it
+                }
         }
     }
 

@@ -78,6 +78,16 @@ fun TextInputEditText.isNotNullOrEmpty(errorString: String): Boolean {
     }
 }
 
+fun EditText.isNotNullAndMinLength( length: Int = 4, errorNullString: String, errorLengthString: String ): Boolean {
+    val matches = this.text.toString().trim().length >= length
+    return if( this.isNotNullOrEmpty(errorNullString) ) {
+        this.error = if( matches ) null else errorLengthString
+        matches
+    } else {
+        false
+    }
+}
+
 fun EditText.isNotNullOrEmpty(errorString: String): Boolean {
     this.onChange { this.error = null }
 

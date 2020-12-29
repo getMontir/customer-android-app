@@ -6,6 +6,9 @@ object session {
     const val isLoggedIn: String = "gm_app_is_Logged_in"
     const val token: String = "gm_app_user_token"
 
+    const val forgotEmail: String = "gm_app_forgot_email"
+    const val forgotToken: String = "gm_app_forgot_token"
+
     const val userId: String = "gm_app_user_id"
     const val userImage: String = "gm_app_user_image"
     const val userName: String = "gm_app_user_name"

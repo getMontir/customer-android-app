@@ -98,6 +98,12 @@ interface APIService {
     ): Response<ApiResponse<String>>
 
     @FormUrlEncoded
+    @POST("customer/pasword/forgot/resend")
+    suspend fun customerForgotPasswordResendAsync(
+        @Field("email") email: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
     @POST("customer/password/forgot/confirm")
     suspend fun customerForgotPasswordConfirmAsync(
         @Field("otp") otp: String,
