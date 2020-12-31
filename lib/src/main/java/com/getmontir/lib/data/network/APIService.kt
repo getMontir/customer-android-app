@@ -107,7 +107,8 @@ interface APIService {
     @POST("customer/password/forgot/confirm")
     suspend fun customerForgotPasswordConfirmAsync(
         @Field("otp") otp: String,
-        @Field("token") token: String
+        @Field("token") token: String,
+        @Field("email") email: String
     ): Response<ApiResponse<String>>
 
     @FormUrlEncoded
@@ -115,7 +116,8 @@ interface APIService {
     suspend fun customerForgotChangePasswordAsync(
         @Field("token") token: String,
         @Field("password") password: String,
-        @Field("password_confirmation") passwordConfirmation: String
+        @Field("password_confirmation") passwordConfirmation: String,
+        @Field("email") email: String
     ): Response<ApiResponse<String>>
 
     @POST("profile")

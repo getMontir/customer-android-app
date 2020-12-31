@@ -22,6 +22,8 @@
     <string name="error_auth_login_wrong">Incorrect email or password</string>
     <string name="error_auth_login_not_found">Customer not found</string>
     <string name="error_auth_login_block">Your account is in a blocked status</string>
+    <string name="error_auth_forgot_email_not_found">Can\'t find account with that email</string>
+    <string name="error_auth_forgot_otp_wrong">Please fill in the OTP code sent to your email</string>
 
     <!-- FIELD -->
     <string name="field_name">Name</string>
@@ -61,6 +63,8 @@
     <string name="forgot_email_description">Enter the email address associated with your account. We will send you an OTP code to use to change your password.</string>
     <string name="forgot_confirm_title">Verification</string>
     <string name="forgot_confirm_description">Enter the 4 digit code that has been sent to your email.</string>
+    <string name="forgot_confirm_resend_title">Succeed</string>
+    <string name="forgot_confirm_resend_message">A verification code has been sent to your email.</string>
     <string name="forgot_change_title">Create New Password</string>
     <string name="forgot_change_description">Your new password must be different from the password that was used previously.</string>
     <string name="walkthrough_third_description">We provide a faster service with a home service system or a mechanic comes directly to the house.</string>

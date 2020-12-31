@@ -127,10 +127,11 @@ class AuthViewModel(
     @InternalCoroutinesApi
     fun forgotConfirm(
         otp: String,
-        token: String
+        token: String,
+        email: String
     ) {
         viewModelScope.launch {
-            repo.customerForgotPasswordConfirm(otp, token)
+            repo.customerForgotPasswordConfirm(otp, token, email)
                 .collect {
                     _forgotToken.value = it
                 }
@@ -142,7 +143,7 @@ class AuthViewModel(
         email: String
     ) {
         viewModelScope.launch {
-            repo.customerForgotPasswordResend(email)
+            repo.customerForgotPassword(email)
                 .collect {
                     _resendForgotToken.value = it
                 }
@@ -153,10 +154,11 @@ class AuthViewModel(
     fun changePassword(
         token: String,
         password: String,
-        passwordConfirmation: String
+        passwordConfirmation: String,
+        email: String
     ) {
         viewModelScope.launch {
-            repo.customerForgotChangePassword( token, password, passwordConfirmation )
+            repo.customerForgotChangePassword( token, password, passwordConfirmation, email )
                 .collect {
                     _forgotToken.value = it
                 }

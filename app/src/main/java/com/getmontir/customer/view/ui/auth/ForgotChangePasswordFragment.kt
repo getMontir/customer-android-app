@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -17,6 +18,7 @@ import com.getmontir.lib.ext.isPasswordConfirmation
 import com.getmontir.lib.presentation.session
 import kotlinx.coroutines.InternalCoroutinesApi
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -63,6 +65,13 @@ class ForgotChangePasswordFragment : GetFragment() {
         })
 
         // Setup listener
+        binding.textInputPasswordRepeat.setOnEditorActionListener { _, actionId, _ ->
+            if( actionId == EditorInfo.IME_ACTION_DONE ) {
+                binding.btnSend.performClick()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
         binding.btnSend.setOnClickListener {
             doChange()
         }
@@ -89,16 +98,38 @@ class ForgotChangePasswordFragment : GetFragment() {
             )
         ) {
             sessionManager.forgotToken?.let {
-                viewModel.changePassword(
-                    it,
-                    binding.textInputPassword.text.toString().trim(),
-                    binding.textInputPasswordRepeat.text.toString().trim()
-                )
+                sessionManager.forgotEmail?.let { it1 ->
+                    viewModel.changePassword(
+                            it,
+                            binding.textInputPassword.text.toString().trim(),
+                            binding.textInputPasswordRepeat.text.toString().trim(),
+                            it1
+                    )
+                }
             }
         }
     }
 
     private fun showLoginFragment() {
         findNavController().popBackStack(R.id.loginFragment, false)
+    }
+
+    /**
+     * Invalid token
+     */
+    override fun handleHttpBadRequest(tag: String, e: Exception) {
+        super.handleHttpBadRequest(tag, e)
+        if( tag == "token" ) {
+            Timber.tag("BISMILLAH").e("Invalid token")
+        }
+    }
+
+    /**
+     * User not found
+     */
+    override fun handleHttpNotFound(tag: String, e: Exception) {
+        if( tag == "token" ) {
+            Timber.tag("BISMILLAH").e("Invalid user")
+        }
     }
 }

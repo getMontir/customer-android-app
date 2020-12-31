@@ -171,7 +171,8 @@ class AuthRepository(
     @InternalCoroutinesApi
     fun customerForgotPasswordConfirm(
         otp: String,
-        token: String
+        token: String,
+        email: String
     ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
         override fun processResponse(response: ApiResponse<String>?): String? {
             return response?.data
@@ -190,7 +191,7 @@ class AuthRepository(
         }
 
         override suspend fun createCallAsync(): Response<ApiResponse<String>> {
-            return api.customerForgotPasswordConfirmAsync( otp, token )
+            return api.customerForgotPasswordConfirmAsync( otp, token, email )
         }
     }.build()
 
@@ -198,7 +199,8 @@ class AuthRepository(
     fun customerForgotChangePassword(
         token: String,
         password: String,
-        passwordConfirmation: String
+        passwordConfirmation: String,
+        email: String
     ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
         override fun processResponse(response: ApiResponse<String>?): String? {
             return response?.data
@@ -218,7 +220,7 @@ class AuthRepository(
         }
 
         override suspend fun createCallAsync(): Response<ApiResponse<String>> {
-            return api.customerForgotChangePasswordAsync(token, password, passwordConfirmation)
+            return api.customerForgotChangePasswordAsync(token, password, passwordConfirmation, email)
         }
     }.build()
 

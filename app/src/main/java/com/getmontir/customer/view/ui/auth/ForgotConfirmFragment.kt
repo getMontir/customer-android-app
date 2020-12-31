@@ -97,12 +97,13 @@ class ForgotConfirmFragment : GetFragment() {
             // If resend
             activity?.let {
                 val alert = AlertDialog.Builder(it, R.style.ThemeOverlay_MaterialComponents_Dialog_Alert)
-                    .setTitle("Berhasil")
+                    .setTitle(getString(R.string.forgot_confirm_resend_title))
                     .setPositiveButton("Ok") { _, _ ->
+                        sessionManager.token = data as String?
                     }
                     .create()
 
-                alert.setMessage("Kode verifikasi telah dikirimkan ke email Anda.")
+                alert.setMessage(getString(R.string.forgot_confirm_resend_message))
                 alert.show()
             }
         }
@@ -119,9 +120,37 @@ class ForgotConfirmFragment : GetFragment() {
             sessionManager.forgotToken?.let {
                 viewModel.forgotConfirm(
                     binding.textOtp.text.toString().trim(),
-                    it
+                    it,
+                    sessionManager.forgotEmail!!
                 )
             }
+        }
+    }
+
+    /**
+     * Invalid User
+     */
+    override fun handleHttpUnauthorized(tag: String, e: Exception) {
+        if( tag == "token" ) {
+            Timber.tag("BISMILLAH").e("Invalid user")
+        }
+    }
+
+    /**
+     * Token not exists
+     */
+    override fun handleHttpBadRequest(tag: String, e: Exception) {
+        if( tag == "token" ) {
+            Timber.tag("BISMILLAH").e("Token not exists")
+        }
+    }
+
+    /**
+     * OTP not exists
+     */
+    override fun handleHttpNotFound(tag: String, e: Exception) {
+        if( tag == "token" ) {
+            binding.textOtp.error = getString(R.string.error_auth_forgot_otp_wrong)
         }
     }
 

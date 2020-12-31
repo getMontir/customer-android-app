@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -60,6 +61,13 @@ class ForgotPasswordFragment : GetFragment() {
         })
 
         // Setup listener
+        binding.textInputEmail.setOnEditorActionListener { _, actionId, _ ->
+            if( actionId == EditorInfo.IME_ACTION_DONE ) {
+                binding.btnSend.performClick()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
         binding.btnSend.setOnClickListener {
              doReset()
         }
@@ -80,6 +88,15 @@ class ForgotPasswordFragment : GetFragment() {
             getString(R.string.error_field_email_invalid)
         ) ) {
             viewModel.forgotPassword(binding.textInputEmail.text.toString().trim())
+        }
+    }
+
+    /**
+     * User not found
+     */
+    override fun handleHttpNotFound(tag: String, e: Exception) {
+        if( tag == "token" ) {
+            binding.textLayoutEmail.error = getString(R.string.error_auth_forgot_email_not_found)
         }
     }
 
