@@ -13,33 +13,62 @@ class VersionRepository(
     private val context: Context,
     private val api: APIService
 ) {
+    /**
+     * Check version for customer app
+     *
+     * @param version
+     * @return Flow<ResultWrapper<Boolean>>
+     */
     @InternalCoroutinesApi
-    fun getVersionCustomer(version: Int): Flow<ResultWrapper<Boolean>> {
-//        return flow {
-//            val list = api.checkUpdateCustomerAsync(version)
-//            emit(list)
-//        }.flowOn(Dispatchers.IO)
-        return object: ApiResourceBound<Boolean, ApiResponse<Boolean>>(context, false) {
-            override fun processResponse(response: ApiResponse<Boolean>?): Boolean? {
-                return response?.data
-            }
+    fun getVersionCustomer(version: Int): Flow<ResultWrapper<Boolean>> = object: ApiResourceBound<Boolean, ApiResponse<Boolean>>(context, false) {
+        override fun processResponse(response: ApiResponse<Boolean>?): Boolean? {
+            return response?.data
+        }
 
-            override fun shouldFetch(data: Boolean?): Boolean {
-                return true
-            }
+        override fun shouldFetch(data: Boolean?): Boolean {
+            return true
+        }
 
-            override suspend fun saveCallResults(items: Boolean) {
-                // DO NOTHING
-            }
+        override suspend fun saveCallResults(items: Boolean) {
+            // DO NOTHING
+        }
 
-            override suspend fun loadFromDb(): Boolean? {
-                return null
-            }
+        override suspend fun loadFromDb(): Boolean? {
+            return null
+        }
 
-            override suspend fun createCallAsync(): Response<ApiResponse<Boolean>> {
-                return api.checkUpdateCustomerAsync(version)
-            }
+        override suspend fun createCallAsync(): Response<ApiResponse<Boolean>> {
+            return api.checkUpdateCustomerAsync(version)
+        }
 
-        }.build()
-    }
+    }.build()
+
+    /**
+     * Check version for mitra app
+     *
+     * @param version
+     * @return Flow<ResultWrapper<Boolean>>
+     */
+    @InternalCoroutinesApi
+    fun getVersionPartner(version: Int): Flow<ResultWrapper<Boolean>> = object: ApiResourceBound<Boolean, ApiResponse<Boolean>>(context, false) {
+        override fun processResponse(response: ApiResponse<Boolean>?): Boolean? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: Boolean?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: Boolean) {
+            // DO NOTHING
+        }
+
+        override suspend fun loadFromDb(): Boolean? {
+            return null
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<Boolean>> {
+            return api.checkUpdateStationAsync(version)
+        }
+    }.build()
 }

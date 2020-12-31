@@ -120,6 +120,49 @@ interface APIService {
         @Field("email") email: String
     ): Response<ApiResponse<String>>
 
+    @FormUrlEncoded
+    @POST("station/auth")
+    suspend fun stationLoginAsync(
+        @Field("email") email: String?,
+        @Field("password") password: String?
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("station/auth/social")
+    suspend fun stationLoginSocialAsync(
+        @Field("token") token: String,
+        @Field("fcm_token") fcmToken: String,
+        @Field("channel") channel: String,
+        @Field("device") device: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("station/register")
+    suspend fun stationRegisterContactAsync(): Response<ApiResponse<StationRegisterContact>>
+
+    @FormUrlEncoded
+    @POST("station/password/forgot")
+    suspend fun stationForgotPasswordAsync(
+        @Field("email") email: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("station/password/forgot/confirm")
+    suspend fun stationForgotPasswordConfirmAsync(
+        @Field("otp") otp: String,
+        @Field("token") token: String,
+        @Field("email") email: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("station/password/change")
+    suspend fun stationForgotChangePasswordAsync(
+        @Field("token") token: String,
+        @Field("password") password: String,
+        @Field("password_confirmation") passwordConfirmation: String,
+        @Field("email") email: String
+    ): Response<ApiResponse<String>>
+
     @POST("profile")
     suspend fun profileUserAsync(): Response<ApiResponse<UserDto>>
 
@@ -131,9 +174,8 @@ interface APIService {
         private const val debugURL = "http://getmontir.paperplane.id/api/"
         private const val releaseURL = "https://api.getmontir.com/api/"
 
-        fun createService( context: Context, sessionManager: SessionManager): APIService {
+        fun createService( context: Context, sessionManager: SessionManager, appToken: String): APIService {
             val baseURL = if( BuildConfig.DEBUG ) debugURL else releaseURL
-            val appToken = "bCtgjoy3gGQHAdoyzFbduGhAGr5hQND5Fbt7ggMWNgi10_dcPBmr9cHc5tK9v"
             val cacheTime = 432000
 
             val interceptor = HttpLoggingInterceptor()

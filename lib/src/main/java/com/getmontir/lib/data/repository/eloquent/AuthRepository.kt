@@ -1,6 +1,7 @@
 package com.getmontir.lib.data.repository.eloquent
 
 import android.content.Context
+import com.getmontir.lib.data.data.dto.StationRegisterContact
 import com.getmontir.lib.data.data.dto.UserDto
 import com.getmontir.lib.data.data.entity.UserEntity
 import com.getmontir.lib.data.network.APIService
@@ -14,12 +15,26 @@ import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import java.util.*
 
+/**
+ * Authentication Repository
+ *
+ * @param context
+ * @param api
+ * @param sessionManager
+ */
 class AuthRepository(
     private val context: Context,
     private val api: APIService,
     private val sessionManager: SessionManager
 ) {
 
+    /**
+     * Customer - Login via credential
+     *
+     * @param email
+     * @param password
+     * @return Flow<ResultWrapper<String>>
+     */
     @InternalCoroutinesApi
     fun customerLogin(
         email: String?,
@@ -48,6 +63,15 @@ class AuthRepository(
 
     }.build()
 
+    /**
+     * Customer - Login via social media
+     *
+     * @param token
+     * @param fcmToken
+     * @param channel
+     * @param device
+     * @return Flow<ResultWrapper<String>>
+     */
     @InternalCoroutinesApi
     fun customerLoginSocial(
         token: String,
@@ -78,6 +102,16 @@ class AuthRepository(
 
     }.build()
 
+    /**
+     * Customer - Register via credential
+     *
+     * @param name
+     * @param phone
+     * @param email
+     * @param password
+     * @param passwordConfirmation
+     * @return Flow<ResultWrapper<String>>
+     */
     @InternalCoroutinesApi
     fun customerRegister(
         name: String,
@@ -110,6 +144,15 @@ class AuthRepository(
 
     }.build()
 
+    /**
+     * Customer - Register via Social Media
+     *
+     * @param token
+     * @param fcmToken
+     * @param channel
+     * @param device
+     * @return Flow<ResultWrapper<String>>
+     */
     @InternalCoroutinesApi
     fun customerRegisterSocial(
         token: String,
@@ -141,6 +184,12 @@ class AuthRepository(
 
     }.build()
 
+    /**
+     * Customer - Forgot Password
+     *
+     * @param email
+     * @return Flow<ResultWrapper<String>>
+     */
     @InternalCoroutinesApi
     fun customerForgotPassword(
         email: String
@@ -168,6 +217,14 @@ class AuthRepository(
 
     }.build()
 
+    /**
+     * Customer - Forgot Password Confirm
+     *
+     * @param otp
+     * @param token
+     * @param email
+     * @return Flow<ResultWrapper<String>>
+     */
     @InternalCoroutinesApi
     fun customerForgotPasswordConfirm(
         otp: String,
@@ -195,6 +252,15 @@ class AuthRepository(
         }
     }.build()
 
+    /**
+     * Customer - Forgot Password Reset
+     *
+     * @param token
+     * @param password
+     * @param passwordConfirmation
+     * @param email
+     * @return Flow<ResultWrapper<String>>
+     */
     @InternalCoroutinesApi
     fun customerForgotChangePassword(
         token: String,
@@ -224,6 +290,12 @@ class AuthRepository(
         }
     }.build()
 
+    /**
+     * Customer - Forgot Password Resend
+     *
+     * @param email
+     * @return Flow<ResultWrapper<String>>
+     */
     @InternalCoroutinesApi
     fun customerForgotPasswordResend(
         email: String
@@ -249,6 +321,222 @@ class AuthRepository(
         }
     }.build()
 
+    @InternalCoroutinesApi
+    fun stationLogin(
+        email: String,
+        password: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.token = items
+            sessionManager.isLoggedIn = true
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.token
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.stationLoginAsync(email, password)
+        }
+    }.build()
+
+    /**
+     *
+     */
+    @InternalCoroutinesApi
+    fun stationLoginSocial(
+        token: String,
+        fcmToken: String,
+        channel: String,
+        device: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.token = items
+            sessionManager.isLoggedIn = true
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.token
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.stationLoginSocialAsync(token, fcmToken, channel, device)
+        }
+    }.build()
+
+    /**
+     *
+     */
+    @InternalCoroutinesApi
+    fun stationRegisterContact(): Flow<ResultWrapper<StationRegisterContact>> = object: ApiResourceBound<StationRegisterContact, ApiResponse<StationRegisterContact>>(context, false) {
+        override fun processResponse(response: ApiResponse<StationRegisterContact>?): StationRegisterContact? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: StationRegisterContact?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: StationRegisterContact) {
+            // DO NOTHING
+        }
+
+        override suspend fun loadFromDb(): StationRegisterContact? {
+            return null
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<StationRegisterContact>> {
+            return api.stationRegisterContactAsync()
+        }
+    }.build()
+
+    /**
+     *
+     */
+    @InternalCoroutinesApi
+    fun stationForgotPassword(
+        email: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.forgotToken = items
+            sessionManager.forgotEmail = email
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.forgotToken
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.stationForgotPasswordAsync(email)
+        }
+    }.build()
+
+    /**
+     *
+     */
+    @InternalCoroutinesApi
+    fun stationForgotPasswordResend(
+        email: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.forgotToken = items
+            sessionManager.forgotEmail = email
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.forgotToken
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.stationForgotPasswordAsync(email)
+        }
+    }.build()
+
+    /**
+     * 
+     */
+    @InternalCoroutinesApi
+    fun stationForgotPasswordConfirm(
+        otp: String,
+        token: String,
+        email: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.forgotToken = items
+            sessionManager.forgotEmail = email
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.forgotToken
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.stationForgotPasswordConfirmAsync(otp, token, email)
+        }
+    }.build()
+
+    /**
+     * Station - Forgot password resetting
+     *
+     * @param token
+     * @param password
+     * @param passwordConfirmation
+     * @param email
+     */
+    @InternalCoroutinesApi
+    fun stationForgotPasswordReset(
+        token: String,
+        password: String,
+        passwordConfirmation: String,
+        email: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context) {
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.forgotToken = null
+            sessionManager.forgotEmail = null
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return null
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.stationForgotChangePasswordAsync(token, password, passwordConfirmation, email)
+        }
+    }.build()
+
+    /**
+     * Get user profile data
+     *
+     * @return Flow<ResultWrapper<UserEntity>>
+     */
     @InternalCoroutinesApi
     fun profile(): Flow<ResultWrapper<UserEntity>> = object: ApiResourceBound<UserEntity, ApiResponse<UserDto>>(context) {
         override fun processResponse(response: ApiResponse<UserDto>?): UserEntity? {
