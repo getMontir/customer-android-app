@@ -138,7 +138,7 @@ interface APIService {
 
     @FormUrlEncoded
     @POST("station/register")
-    suspend fun stationRegisterContactAsync(): Response<ApiResponse<StationRegisterContact>>
+    suspend fun stationRegisterContactAsync(): Response<ApiResponse<StationRegisterContactDto>>
 
     @FormUrlEncoded
     @POST("station/password/forgot")
@@ -157,6 +157,70 @@ interface APIService {
     @FormUrlEncoded
     @POST("station/password/change")
     suspend fun stationForgotChangePasswordAsync(
+        @Field("token") token: String,
+        @Field("password") password: String,
+        @Field("password_confirmation") passwordConfirmation: String,
+        @Field("email") email: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("mechanic/auth")
+    suspend fun mechanicLoginAsync(
+        @Field("email") email: String?,
+        @Field("password") password: String?
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("mechanic/auth/social")
+    suspend fun mechanicLoginSocialAsync(
+        @Field("token") token: String,
+        @Field("fcm_token") fcmToken: String,
+        @Field("channel") channel: String,
+        @Field("device") device: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("mechanic/register")
+    suspend fun mechanicRegisterAsync(
+        @Field("name") name: String,
+        @Field("phone") phone: String,
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("password_confirmation") passwordConfirmation: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("mechanic/register/social")
+    suspend fun mechanicRegisterSocialAsync(
+        @Field("token") token: String,
+        @Field("fcm_token") fcmToken: String,
+        @Field("channel") channel: String,
+        @Field("device") device: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("mechanic/password/forgot")
+    suspend fun mechanicForgotPasswordAsync(
+        @Field("email") email: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("mechanic/pasword/forgot/resend")
+    suspend fun mechanicForgotPasswordResendAsync(
+        @Field("email") email: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("mechanic/password/forgot/confirm")
+    suspend fun mechanicForgotPasswordConfirmAsync(
+        @Field("otp") otp: String,
+        @Field("token") token: String,
+        @Field("email") email: String
+    ): Response<ApiResponse<String>>
+
+    @FormUrlEncoded
+    @POST("mechanic/password/change")
+    suspend fun mechanicForgotChangePasswordAsync(
         @Field("token") token: String,
         @Field("password") password: String,
         @Field("password_confirmation") passwordConfirmation: String,

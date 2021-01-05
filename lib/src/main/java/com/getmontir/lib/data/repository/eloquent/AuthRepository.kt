@@ -1,14 +1,13 @@
 package com.getmontir.lib.data.repository.eloquent
 
 import android.content.Context
-import com.getmontir.lib.data.data.dto.StationRegisterContact
+import com.getmontir.lib.data.data.dto.StationRegisterContactDto
 import com.getmontir.lib.data.data.dto.UserDto
 import com.getmontir.lib.data.data.entity.UserEntity
 import com.getmontir.lib.data.network.APIService
 import com.getmontir.lib.data.network.ApiResourceBound
 import com.getmontir.lib.data.response.ApiResponse
 import com.getmontir.lib.data.response.ResultWrapper
-import com.getmontir.lib.presentation.session
 import com.getmontir.lib.presentation.utils.SessionManager
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -384,24 +383,24 @@ class AuthRepository(
      *
      */
     @InternalCoroutinesApi
-    fun stationRegisterContact(): Flow<ResultWrapper<StationRegisterContact>> = object: ApiResourceBound<StationRegisterContact, ApiResponse<StationRegisterContact>>(context, false) {
-        override fun processResponse(response: ApiResponse<StationRegisterContact>?): StationRegisterContact? {
+    fun stationRegisterContact(): Flow<ResultWrapper<StationRegisterContactDto>> = object: ApiResourceBound<StationRegisterContactDto, ApiResponse<StationRegisterContactDto>>(context, false) {
+        override fun processResponse(response: ApiResponse<StationRegisterContactDto>?): StationRegisterContactDto? {
             return response?.data
         }
 
-        override fun shouldFetch(data: StationRegisterContact?): Boolean {
+        override fun shouldFetch(data: StationRegisterContactDto?): Boolean {
             return true
         }
 
-        override suspend fun saveCallResults(items: StationRegisterContact) {
+        override suspend fun saveCallResults(items: StationRegisterContactDto) {
             // DO NOTHING
         }
 
-        override suspend fun loadFromDb(): StationRegisterContact? {
+        override suspend fun loadFromDb(): StationRegisterContactDto? {
             return null
         }
 
-        override suspend fun createCallAsync(): Response<ApiResponse<StationRegisterContact>> {
+        override suspend fun createCallAsync(): Response<ApiResponse<StationRegisterContactDto>> {
             return api.stationRegisterContactAsync()
         }
     }.build()
@@ -529,6 +528,226 @@ class AuthRepository(
 
         override suspend fun createCallAsync(): Response<ApiResponse<String>> {
             return api.stationForgotChangePasswordAsync(token, password, passwordConfirmation, email)
+        }
+    }.build()
+
+    @InternalCoroutinesApi
+    fun mechanicLogin(
+        email: String,
+        password: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context){
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.token = items
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.token
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.mechanicLoginAsync(email, password)
+        }
+    }.build()
+
+    @InternalCoroutinesApi
+    fun mechanicLoginSocial(
+        token: String,
+        fcmToken: String,
+        channel: String,
+        device: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context){
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.token = items
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.token
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.mechanicLoginSocialAsync(token, fcmToken, channel, device)
+        }
+    }.build()
+
+    @InternalCoroutinesApi
+    fun mechanicRegister(
+        name: String,
+        phone: String,
+        email: String,
+        password: String,
+        passwordConfirmation: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context){
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.token = items
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.token
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.mechanicRegisterAsync(name, phone, email, password, passwordConfirmation)
+        }
+    }.build()
+
+    @InternalCoroutinesApi
+    fun mechanicRegisterSocial(
+        token: String,
+        fcmToken: String,
+        channel: String,
+        device: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context){
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.token = items
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.token
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.mechanicLoginSocialAsync(token, fcmToken, channel, device)
+        }
+    }.build()
+
+    @InternalCoroutinesApi
+    fun mechanicForgotPassword(
+        email: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context){
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.forgotToken = items
+            sessionManager.forgotEmail = email
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.forgotToken
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.mechanicForgotPasswordAsync(email)
+        }
+    }.build()
+
+    @InternalCoroutinesApi
+    fun mechanicForgotPasswordResend(
+        email: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context){
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.forgotToken = items
+            sessionManager.forgotEmail = email
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.forgotToken
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.mechanicForgotPasswordResendAsync(email)
+        }
+    }.build()
+
+    @InternalCoroutinesApi
+    fun mechanicForgotPasswordConfirm(
+        otp: String,
+        token: String,
+        email: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context){
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.forgotToken = items
+            sessionManager.forgotEmail = email
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return sessionManager.forgotToken
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.mechanicForgotPasswordConfirmAsync(otp, token, email)
+        }
+    }.build()
+
+    @InternalCoroutinesApi
+    fun mechanicForgotPasswordReset(
+        token: String,
+        password: String,
+        passwordConfirmation: String,
+        email: String
+    ): Flow<ResultWrapper<String>> = object: ApiResourceBound<String, ApiResponse<String>>(context){
+        override fun processResponse(response: ApiResponse<String>?): String? {
+            return response?.data
+        }
+
+        override fun shouldFetch(data: String?): Boolean {
+            return true
+        }
+
+        override suspend fun saveCallResults(items: String) {
+            sessionManager.forgotEmail = null
+            sessionManager.forgotToken = null
+        }
+
+        override suspend fun loadFromDb(): String? {
+            return null
+        }
+
+        override suspend fun createCallAsync(): Response<ApiResponse<String>> {
+            return api.mechanicForgotChangePasswordAsync(token, password, passwordConfirmation, email)
         }
     }.build()
 

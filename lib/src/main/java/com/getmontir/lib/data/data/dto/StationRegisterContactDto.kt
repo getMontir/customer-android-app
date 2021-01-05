@@ -2,7 +2,7 @@ package com.getmontir.lib.data.data.dto
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class StationRegisterContact(
+data class StationRegisterContactDto(
     @JsonProperty(value = "name")
     val name: String?,
 
