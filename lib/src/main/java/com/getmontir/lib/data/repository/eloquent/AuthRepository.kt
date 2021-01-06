@@ -545,6 +545,7 @@ class AuthRepository(
         }
 
         override suspend fun saveCallResults(items: String) {
+            sessionManager.isLoggedIn = true
             sessionManager.token = items
         }
 
@@ -573,6 +574,7 @@ class AuthRepository(
         }
 
         override suspend fun saveCallResults(items: String) {
+            sessionManager.isLoggedIn = true
             sessionManager.token = items
         }
 
@@ -602,6 +604,7 @@ class AuthRepository(
         }
 
         override suspend fun saveCallResults(items: String) {
+            sessionManager.isLoggedIn = true
             sessionManager.token = items
         }
 
@@ -630,6 +633,7 @@ class AuthRepository(
         }
 
         override suspend fun saveCallResults(items: String) {
+            sessionManager.isLoggedIn = true
             sessionManager.token = items
         }
 
