@@ -136,7 +136,6 @@ interface APIService {
         @Field("device") device: String
     ): Response<ApiResponse<String>>
 
-    @FormUrlEncoded
     @POST("station/register")
     suspend fun stationRegisterContactAsync(): Response<ApiResponse<StationRegisterContactDto>>
 
