@@ -89,6 +89,15 @@
     <color name="line_focused">#338f92a1</color>
     <color name="line_default">#C5CAE9</color>
 
+    <color name="grayscale_title_active">#14142b</color>
+    <color name="grayscale_body">#4e4b66</color>
+    <color name="grayscale_label">#6e7191</color>
+    <color name="grayscale_placeholder">#a0a3bd</color>
+    <color name="grayscale_line">#d9dbe9</color>
+    <color name="grayscale_input_background">#eff0f6</color>
+    <color name="grayscale_background">#f7f7fc</color>
+    <color name="grayscale_off_white">#fcfcfc</color>
+
     <!-- ARRAY -->
     <array name="array_dot_active">
         <item>@color/dotActiveColor</item>

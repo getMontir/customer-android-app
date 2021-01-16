@@ -83,4 +83,10 @@
     <!-- UPDATE -->
     <string name="update_title">Updates Available</string>
     <string name="update_description">Please update the getMontir application to get comfortable using this application.</string>
+
+    <!-- MAIN ACTIVITY -->
+    <string name="navigation_home">Home</string>
+    <string name="navigation_order">Orders</string>
+    <string name="navigation_vehicle">Vehicles</string>
+    <string name="navigation_profile">Profile</string>
 </resources>

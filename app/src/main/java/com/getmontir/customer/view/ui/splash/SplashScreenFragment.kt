@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.getmontir.customer.R
 import com.getmontir.customer.view.ui.AuthActivity
+import com.getmontir.customer.view.ui.MainActivity
 import com.getmontir.customer.view.ui.base.GetFragment
 import com.getmontir.customer.viewmodel.SplashViewModel
 import com.getmontir.lib.presentation.base.BaseFragment
@@ -57,28 +58,15 @@ open class SplashScreenFragment : GetFragment() {
                     startActivity(
                         Intent(context, AuthActivity::class.java)
                     )
-                    activity?.finish()
                 } else {
                     // Launch Home Activity
+                    startActivity(
+                        Intent(
+                            requireContext(), MainActivity::class.java
+                        )
+                    )
                 }
-//                if( !sessionManager.isUsed ) {
-//                    // Launch Walkthrough
-//                    activity?.let {
-//                        val intent = Intent(context, WalkthroughActivity::class.java)
-//                        startActivity(intent)
-//                        it.finish()
-//                    }
-//                } else {
-//                    if( sessionManager.isLoggedIn ) {
-//                        // Launch Home Activity
-//                    } else {
-//                        // Launch Auth Activity
-//                        startActivity(
-//                            Intent(context, AuthActivity::class.java)
-//                        )
-//                        activity?.finish()
-//                    }
-//                }
+                activity?.finish()
             }
         }
     }

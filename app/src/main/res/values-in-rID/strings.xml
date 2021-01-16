@@ -77,4 +77,8 @@
     <string name="forgot_confirm_description">Masukan 4 digit kode yang telah dikirim ke email Anda.</string>
     <string name="forgot_change_title">Buat Kata Sandi Baru</string>
     <string name="forgot_change_description">Kata sandi baru Anda harus berbeda dari kata sandi yang digunakan sebelumnya.</string>
+    <string name="navigation_home">Home</string>
+    <string name="navigation_order">Order</string>
+    <string name="navigation_vehicle">Kendaraan</string>
+    <string name="navigation_profile">Profil</string>
 </resources>

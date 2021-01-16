@@ -2,6 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.GetMontir" parent="Base.Theme.GetMontir"/>
 
+    <style name="Theme.GetMontir.Dark">
+        <item name="android:statusBarColor" tools:ignore="NewApi">#0B2031</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
+        <item name="android:navigationBarColor" tools:ignore="NewApi">#0B2031</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?android:attr/colorBackground</item>
+        <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.Dark</item>
+    </style>
+
     <style name="Theme.GetMontir.Splash">
         <item name="android:statusBarColor" tools:ignore="NewApi">@color/blackBlue900</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
@@ -26,9 +35,21 @@
         <item name="actionOverflowButtonStyle">@style/Widget.GetMontir.ActionButton.Overflow</item>
     </style>
 
-    <style name="Theme.GetMontir.ActionBar"/>
+    <style name="Theme.GetMontir.ActionBar">
+        <item name="windowActionBar">true</item>
+        <item name="windowNoTitle">false</item>
+    </style>
 
     <style name="Theme.GetMontir.ActionBar.White">
+        <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.White</item>
+    </style>
+
+    <style name="Theme.GetMontir.ActionBar.Dark">
+        <item name="android:statusBarColor" tools:ignore="NewApi">#0B2031</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
+        <item name="android:navigationBarColor" tools:ignore="NewApi">#0B2031</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?android:attr/colorBackground</item>
         <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.White</item>
     </style>
 
@@ -86,6 +107,7 @@
         <item name="bottomSheetDialogTheme">@style/ThemeOverlay.GetMontir.BottomSheetDialog</item>
         <item name="navigationViewStyle">@style/Widget.GetMontir.NavigationView</item>
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
+        <item name="bottomNavigationStyle">@style/Widget.GetMontir.BottomNavigationView</item>
 
         <item name="materialButtonStyle">@style/Theme.GetMontir.Button</item>
         <item name="textInputStyle">@style/Theme.GetMontir.TextInputLayout</item>
@@ -99,6 +121,22 @@
         <item name="android:navigationBarColor" tools:ignore="NewApi">?android:attr/colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
         <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?attr/colorControlHighlight</item>
+    </style>
+
+    <style name="Widget.GetMontir.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton"></style>
+
+    <style name="Widget.GetMontir.Button.TextButton.Small">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Widget.GetMontir.Button.Secondary" parent="Theme.GetMontir.Button">
+        <item name="backgroundTint">@color/selector_btn_secondary_bg</item>
+        <item name="android:textColor">@color/secondaryColor</item>
+    </style>
+
+    <style name="Widget.GetMontir.Button.Secondary.Small">
+        <item name="android:textSize">12sp</item>
+        <item name="textAllCaps">false</item>
     </style>
 
 </resources>

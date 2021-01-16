@@ -17,10 +17,10 @@
                     android:endX="23.48"
                     android:endY="19.79">
                     <item
-                        android:color="#7B7B7B"
+                        android:color="#E4283D"
                         android:offset="0"/>
                     <item
-                        android:color="#505050"
+                        android:color="#B70015"
                         android:offset="1"/>
                 </gradient>
             </aapt:attr>

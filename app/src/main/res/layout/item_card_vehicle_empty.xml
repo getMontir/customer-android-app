@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_empty_vehicle"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Belum Ada Kendaraan"
+            android:textStyle="bold"
+            style="@style/TextAppearance.GetMontir.Body1"
+            android:textAlignment="center"
+            android:textColor="@color/grayscale_body"/>
+
+        <Button
+            android:id="@+id/btnAddVehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Tambah Kendaraan"
+            android:layout_gravity="center"
+            style="@style/Widget.GetMontir.Button.Secondary.Small"/>
+
+    </LinearLayout>
+
+</layout>

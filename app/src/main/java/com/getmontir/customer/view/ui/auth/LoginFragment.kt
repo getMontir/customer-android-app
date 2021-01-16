@@ -19,6 +19,7 @@ import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.getmontir.customer.R
 import com.getmontir.customer.databinding.FragmentAuthLoginBinding
+import com.getmontir.customer.view.ui.MainActivity
 import com.getmontir.customer.view.ui.base.GetFragment
 import com.getmontir.customer.viewmodel.AuthViewModel
 import com.getmontir.lib.ext.isEmailNotNull
@@ -176,6 +177,11 @@ class LoginFragment : GetFragment() {
 
         if( tag == "user" ) {
             // Launch main activity
+            startActivity(
+                Intent(
+                    requireContext(), MainActivity::class.java
+                )
+            )
             activity?.finish()
         }
     }
