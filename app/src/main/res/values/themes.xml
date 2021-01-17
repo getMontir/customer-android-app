@@ -11,6 +11,14 @@
         <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.Dark</item>
     </style>
 
+    <style name="Theme.GetMontir.Light">
+        <item name="android:statusBarColor" tools:ignore="NewApi">@color/white_50</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:navigationBarColor" tools:ignore="NewApi">@color/white_50</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+        <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.Light</item>
+    </style>
+
     <style name="Theme.GetMontir.Splash">
         <item name="android:statusBarColor" tools:ignore="NewApi">@color/blackBlue900</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
@@ -123,7 +131,7 @@
         <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?attr/colorControlHighlight</item>
     </style>
 
-    <style name="Widget.GetMontir.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton"></style>
+    <style name="Widget.GetMontir.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton"/>
 
     <style name="Widget.GetMontir.Button.TextButton.Small">
         <item name="android:textSize">12sp</item>

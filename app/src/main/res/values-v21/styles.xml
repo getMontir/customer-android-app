@@ -19,4 +19,11 @@
         <item name="android:elevation">0dp</item>
     </style>
 
+    <style name="Widget.GetMontir.Toolbar.Light" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
+        <item name="android:background">@color/white_50</item>
+        <item name="titleTextColor">@color/primaryColor</item>
+        <item name="elevation">0dp</item>
+        <item name="android:elevation">0dp</item>
+    </style>
+
 </resources>

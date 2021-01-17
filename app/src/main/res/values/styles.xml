@@ -98,6 +98,13 @@
         <item name="android:background">#0B2031</item>
         <item name="titleTextColor">@color/white_50</item>
         <item name="elevation">0dp</item>
+        <item name="titleTextAppearance">@style/TextAppearance.GetMontir.Body2</item>
+    </style>
+
+    <style name="Widget.GetMontir.Toolbar.Light" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
+        <item name="android:background">@color/white_50</item>
+        <item name="titleTextColor">@color/primaryColor</item>
+        <item name="elevation">0dp</item>
     </style>
 
     <style name="Widget.GetMontir.ActionButton.Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
@@ -107,9 +114,5 @@
     <style name="Widget.GetMontir.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
         <item name="itemIconTint">@null</item>
     </style>
-
-<!--    <style name="Widget.GetMontir.Layout">-->
-<!--        <item name="enforceMaterialTheme">true</item>-->
-<!--    </style>-->
 
 </resources>
