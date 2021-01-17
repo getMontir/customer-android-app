@@ -49,8 +49,9 @@ class OrderFragment : GetFragment() {
         // Setup Toolbar
         val toolbar: Toolbar = binding.toolbar
         val navController = findNavController()
-        binding.collapsingToolbar.setupWithNavController(toolbar, navController, AppBarConfiguration(navController.graph))
-        binding.collapsingToolbar.title = resources.getString(R.string.navigation_order)
+        binding.toolbar.setupWithNavController(navController)
+//        binding.collapsingToolbar.setupWithNavController(toolbar, navController, AppBarConfiguration(navController.graph))
+//        binding.collapsingToolbar.title = resources.getString(R.string.navigation_order)
 
         // Setup view
         binding.viewPager.adapter = TabOrderAdapter(this)

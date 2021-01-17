@@ -25,7 +25,7 @@
         android:theme="@style/Theme.GetMontir">
         <activity
             android:name=".view.ui.MainActivity"
-            android:theme="@style/Theme.GetMontir.Dark"/>
+            android:theme="@style/Theme.GetMontir"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

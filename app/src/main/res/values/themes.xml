@@ -1,23 +1,107 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor" tools:ignore="NewApi">@color/primaryColor</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
+        <item name="android:navigationBarColor" tools:ignore="NewApi">@color/primaryColor</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?attr/colorControlHighlight</item>
+    </style>
+
     <!-- Base application theme. -->
     <style name="Theme.GetMontir" parent="Base.Theme.GetMontir"/>
 
-    <style name="Theme.GetMontir.Dark">
-        <item name="android:statusBarColor" tools:ignore="NewApi">#0B2031</item>
-        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>
-        <item name="android:navigationBarColor" tools:ignore="NewApi">#0B2031</item>
-        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
-        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?android:attr/colorBackground</item>
-        <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.Dark</item>
+    <!--Base custom theme which will be shared between both light and dark theme variants-->
+    <style name="Base.Theme.GetMontir" parent="Base.Theme.MaterialThemeBuilder">
+        <item name="fontFamily">@font/dm_sans</item>
+
+        <!--Material color attributes (light theme) -->
+        <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
+        <!--colorSecondary colors are most often used as accents on components, such as FABs and -->
+        <!--selection controls.-->
+        <item name="colorPrimary">@color/secondaryColor</item>
+        <item name="colorPrimaryVariant">@color/secondaryDarkColor</item>
+        <item name="colorSecondary">@color/primaryColor</item>
+        <item name="colorSecondaryVariant">@color/primaryDarkColor</item>
+
+        <!--colorBackground appears behind scrollable content and is used for the default window-->
+        <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
+        <!--and menus. colorError is used to indicate an error state for components such as-->
+        <!--text fields.-->
+        <item name="android:colorBackground">@color/white_50</item>
+        <item name="colorSurface">@color/white_50</item>
+        <item name="colorError">@color/red_600</item>
+
+        <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
+        <!--on which they appear.-->
+        <item name="colorOnPrimary">@color/white_50</item>
+        <item name="colorOnSecondary">@color/white_50</item>
+        <item name="colorOnBackground">@color/grayscale_title_active</item>
+        <item name="colorOnSurface">@color/grayscale_title_active</item>
+        <item name="colorOnError">@color/white_50</item>
+
+        <item name="colorControlNormal">@color/white_50</item>
+
+        <!--Material type attributes-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.GetMontir.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.GetMontir.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.GetMontir.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.GetMontir.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.GetMontir.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.GetMontir.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.GetMontir.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.GetMontir.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.GetMontir.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.GetMontir.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.GetMontir.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.GetMontir.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.GetMontir.Overline</item>
+
+        <!--Material shape attributes-->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MyTheme.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MyTheme.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyTheme.LargeComponent</item>
+
+        <!-- Framework, AppCompat, or Design Widget styles -->
+        <item name="appBarLayoutStyle">@style/Widget.GetMontir.AppBarLayout</item>
+        <item name="bottomNavigationStyle">@style/Widget.GetMontir.BottomNavigationView</item>
+        <item name="checkboxStyle">@style/ThemeOverlay.GetMontir.CheckBox</item>
+        <item name="materialButtonStyle">@style/Theme.GetMontir.Button</item>
+        <item name="navigationViewStyle">@style/Widget.GetMontir.NavigationView</item>
+        <item name="textInputStyle">@style/Theme.GetMontir.TextInputLayout</item>
+        <item name="tabStyle">@style/Widget.MaterialComponents.TabLayout</item>
+        <item name="toolbarNavigationButtonStyle">@style/Widget.GetMontir.Toolbar.Primary.Button.Navigation.Tinted</item>
+        <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.Primary</item>
+
+        <!-- Dialog themes -->
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.GetMontir.BottomSheetDialog</item>
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert</item>
+
+        <!-- Picker styles and themes. -->
+
+        <item name="android:windowActivityTransitions" tools:targetApi="lollipop">true</item>
+
     </style>
 
-    <style name="Theme.GetMontir.Light">
-        <item name="android:statusBarColor" tools:ignore="NewApi">@color/white_50</item>
-        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
-        <item name="android:navigationBarColor" tools:ignore="NewApi">@color/white_50</item>
-        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
-        <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.Light</item>
-    </style>
+<!--    <style name="Theme.GetMontir.Dark">-->
+<!--        <item name="android:statusBarColor" tools:ignore="NewApi">#0B2031</item>-->
+<!--        <item name="android:windowLightStatusBar" tools:ignore="NewApi">false</item>-->
+<!--        <item name="android:navigationBarColor" tools:ignore="NewApi">#0B2031</item>-->
+<!--        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>-->
+<!--        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?android:attr/colorBackground</item>-->
+<!--        <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.Dark</item>-->
+<!--        <item name="homeAsUpIndicator">@drawable/ic_back_material</item>-->
+<!--    </style>-->
+
+<!--    <style name="Theme.GetMontir.Light">-->
+<!--        <item name="android:statusBarColor" tools:ignore="NewApi">@color/white_50</item>-->
+<!--        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>-->
+<!--        <item name="android:navigationBarColor" tools:ignore="NewApi">@color/white_50</item>-->
+<!--        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>-->
+<!--        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?android:attr/colorBackground</item>-->
+<!--        <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.Light</item>-->
+<!--        <item name="homeAsUpIndicator">@drawable/ic_back_material_black</item>-->
+<!--    </style>-->
 
     <style name="Theme.GetMontir.Splash">
         <item name="android:statusBarColor" tools:ignore="NewApi">@color/blackBlue900</item>
@@ -61,90 +145,17 @@
         <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.White</item>
     </style>
 
-    <!--Base custom theme which will be shared between both light and dark theme variants-->
-    <style name="Base.Theme.GetMontir" parent="Base.Theme.MaterialThemeBuilder">
-        <item name="fontFamily">@font/dm_sans</item>
-
-        <!--Material color attributes (light theme) -->
-        <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
-        <!--colorSecondary colors are most often used as accents on components, such as FABs and -->
-        <!--selection controls.-->
-        <item name="colorPrimary">@color/secondaryColor</item>
-        <item name="colorPrimaryVariant">@color/secondaryDarkColor</item>
-        <item name="colorSecondary">@color/primaryColor</item>
-        <item name="colorSecondaryVariant">@color/primaryDarkColor</item>
-
-        <!--colorBackground appears behind scrollable content and is used for the default window-->
-        <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
-        <!--and menus. colorError is used to indicate an error state for components such as-->
-        <!--text fields.-->
-        <item name="android:colorBackground">@color/white_50</item>
-        <item name="colorSurface">@color/white_50</item>
-        <item name="colorError">@color/red_600</item>
-
-        <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
-        <!--on which they appear.-->
-        <item name="colorOnPrimary">@color/white_50</item>
-        <item name="colorOnSecondary">@color/white_50</item>
-        <item name="colorOnBackground">@color/black_900</item>
-        <item name="colorOnSurface">@color/black_900</item>
-        <item name="colorOnError">@color/white_50</item>
-
-        <!--Material type attributes-->
-        <item name="textAppearanceHeadline1">@style/TextAppearance.GetMontir.Headline1</item>
-        <item name="textAppearanceHeadline2">@style/TextAppearance.GetMontir.Headline2</item>
-        <item name="textAppearanceHeadline3">@style/TextAppearance.GetMontir.Headline3</item>
-        <item name="textAppearanceHeadline4">@style/TextAppearance.GetMontir.Headline4</item>
-        <item name="textAppearanceHeadline5">@style/TextAppearance.GetMontir.Headline5</item>
-        <item name="textAppearanceHeadline6">@style/TextAppearance.GetMontir.Headline6</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.GetMontir.Subtitle1</item>
-        <item name="textAppearanceSubtitle2">@style/TextAppearance.GetMontir.Subtitle2</item>
-        <item name="textAppearanceBody1">@style/TextAppearance.GetMontir.Body1</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.GetMontir.Body2</item>
-        <item name="textAppearanceButton">@style/TextAppearance.GetMontir.Button</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.GetMontir.Caption</item>
-        <item name="textAppearanceOverline">@style/TextAppearance.GetMontir.Overline</item>
-
-        <!--Material shape attributes-->
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MyTheme.SmallComponent</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MyTheme.MediumComponent</item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyTheme.LargeComponent</item>
-
-        <!--Component styles-->
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert</item>
-        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.GetMontir.BottomSheetDialog</item>
-        <item name="navigationViewStyle">@style/Widget.GetMontir.NavigationView</item>
-        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
-        <item name="bottomNavigationStyle">@style/Widget.GetMontir.BottomNavigationView</item>
-
-        <item name="materialButtonStyle">@style/Theme.GetMontir.Button</item>
-        <item name="textInputStyle">@style/Theme.GetMontir.TextInputLayout</item>
-        <item name="checkboxStyle">@style/ThemeOverlay.GetMontir.CheckBox</item>
-
-    </style>
-
-    <style name="Base.Theme.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor" tools:ignore="NewApi">?attr/colorSurface</item>
+    <style name="Theme.GetMontir.Light">
+        <item name="android:statusBarColor" tools:ignore="NewApi">?colorSurface</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
-        <item name="android:navigationBarColor" tools:ignore="NewApi">?android:attr/colorBackground</item>
+        <item name="android:navigationBarColor" tools:ignore="NewApi">?colorSurface</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
-        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?attr/colorControlHighlight</item>
-    </style>
 
-    <style name="Widget.GetMontir.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton"/>
+        <item name="colorControlNormal">@color/primaryColor</item>
+        <item name="android:textColorPrimary">@color/primaryColor</item>
 
-    <style name="Widget.GetMontir.Button.TextButton.Small">
-        <item name="android:textSize">12sp</item>
-    </style>
-
-    <style name="Widget.GetMontir.Button.Secondary" parent="Theme.GetMontir.Button">
-        <item name="backgroundTint">@color/selector_btn_secondary_bg</item>
-        <item name="android:textColor">@color/secondaryColor</item>
-    </style>
-
-    <style name="Widget.GetMontir.Button.Secondary.Small">
-        <item name="android:textSize">12sp</item>
-        <item name="textAllCaps">false</item>
+        <!-- Framework, AppCompat, or Design Widget styles -->
+        <item name="toolbarStyle">@style/Widget.GetMontir.Toolbar.Surface</item>
     </style>
 
 </resources>

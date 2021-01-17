@@ -94,25 +94,45 @@
         <item name="homeAsUpIndicator">@drawable/abc_ic_clear_material</item>
     </style>
 
-    <style name="Widget.GetMontir.Toolbar.Dark" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
+    <style name="Widget.GetMontir.Toolbar.Dark" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="android:background">#0B2031</item>
         <item name="titleTextColor">@color/white_50</item>
         <item name="elevation">0dp</item>
-        <item name="titleTextAppearance">@style/TextAppearance.GetMontir.Body2</item>
+        <item name="android:elevation" tools:targetApi="lollipop">0dp</item>
+        <item name="titleTextAppearance">@style/TextAppearance.GetMontir.Toolbar.Title</item>
+        <item name="colorControlNormal">@color/white_50</item>
+        <item name="actionMenuTextColor">@color/white_50</item>
+        <item name="android:textColorSecondary">@color/white_50</item>
+        <item name="homeAsUpIndicator">@drawable/ic_back_material</item>
+        <!-- Note: this theme overlay will only work if the style is applied directly to a Toolbar. -->
+        <item name="android:theme">@style/ThemeOverlay.GetMontir.Toolbar.Light</item>
     </style>
 
-    <style name="Widget.GetMontir.Toolbar.Light" parent="Widget.MaterialComponents.Toolbar.PrimarySurface">
+    <style name="Widget.GetMontir.Toolbar.Light" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="android:background">@color/white_50</item>
         <item name="titleTextColor">@color/primaryColor</item>
+        <item name="colorControlNormal">@color/primaryColor</item>
+        <item name="actionMenuTextColor">@color/primaryColor</item>
         <item name="elevation">0dp</item>
+        <item name="android:elevation" tools:targetApi="lollipop">0dp</item>
+        <!-- Note: this theme overlay will only work if the style is applied directly to a Toolbar. -->
+        <item name="android:theme">@style/ThemeOverlay.GetMontir.Toolbar.Light</item>
     </style>
 
     <style name="Widget.GetMontir.ActionButton.Overflow" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="actionBarItemBackground">@color/purple_200</item>
     </style>
 
-    <style name="Widget.GetMontir.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-        <item name="itemIconTint">@null</item>
+    <style name="Widget.GetMontir.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView"/>
+
+    <style name="ThemeOverlay.GetMontir.Toolbar.Dark" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="colorControlNormal">@color/white_50</item>
+        <item name="actionMenuTextColor">@color/white_50</item>
+    </style>
+
+    <style name="ThemeOverlay.GetMontir.Toolbar.Light" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="colorControlNormal">@color/primaryColor</item>
+        <item name="actionMenuTextColor">@color/primaryColor</item>
     </style>
 
 </resources>

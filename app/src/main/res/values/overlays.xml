@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TOOLBAR -->
+    <style name="ThemeOverlay.GetMontir.Toolbar.Primary" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="colorControlNormal">@color/white_50</item>
+        <item name="actionMenuTextColor">@color/white_50</item>
+    </style>
+    <style name="ThemeOverlay.GetMontir.Toolbar.Surface" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
+        <item name="colorControlNormal">@color/primaryColor</item>
+        <item name="actionMenuTextColor">@color/primaryColor</item>
+    </style>
+</resources>

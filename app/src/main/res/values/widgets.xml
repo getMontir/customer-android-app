@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns2="http://schemas.android.com/tools">
+
+    <!-- ACTION BAR -->
+    <style name="Widget.GetMontir.ActionBar.Button" parent="Widget.MaterialComponents.PopupMenu.Overflow">
+        <item name="android:tint">@color/primaryColor</item>
+    </style>
+
+    <!-- APP BAR LAYOUT -->
+    <style name="Widget.GetMontir.AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.Primary">
+        <item name="android:background">@null</item>
+    </style>
+
+    <!-- TOOLBAR -->
+    <style name="Widget.GetMontir.Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:elevation" ns2:ignore="NewApi">0dp</item>
+        <item name="titleTextAppearance">@style/TextAppearance.GetMontir.Toolbar.Title</item>
+    </style>
+    <style name="Widget.GetMontir.Toolbar.Surface">
+        <item name="colorOnPrimary">@color/primaryColor</item>
+        <item name="colorControlNormal">@color/primaryColor</item>
+        <item name="tint">@color/primaryColor</item>
+        <item name="popupTheme">@style/ThemeOverlay.MaterialComponents.Dark</item>
+
+        <item name="android:background">@color/white_50</item>
+        <item name="titleTextColor">@color/primaryColor</item>
+        <item name="subtitleTextColor">@color/primaryColor</item>
+        <!-- Note: this theme overlay will only work if the style is applied directly to a Toolbar. -->
+        <item name="android:theme">@style/ThemeOverlay.GetMontir.Toolbar.Surface</item>
+    </style>
+    <style name="Widget.GetMontir.Toolbar.Primary">
+        <item name="android:background">@color/primaryColor</item>
+        <item name="titleTextColor">@color/white_50</item>
+        <item name="subtitleTextColor">@color/grayscale_label</item>
+        <!-- Note: this theme overlay will only work if the style is applied directly to a Toolbar. -->
+        <item name="android:theme">@style/ThemeOverlay.GetMontir.Toolbar.Primary</item>
+    </style>
+    <style name="Widget.GetMontir.Toolbar.Surface.Button.Navigation.Tinted" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="tint">@color/primaryColor</item>
+    </style>
+    <style name="Widget.GetMontir.Toolbar.Primary.Button.Navigation.Tinted" parent="Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="tint">@color/white_50</item>
+    </style>
+
+    <!-- BUTTON WIDGET -->
+    <style name="Widget.GetMontir.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton"/>
+
+    <style name="Widget.GetMontir.Button.TextButton.Small">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Widget.GetMontir.Button.Secondary" parent="Theme.GetMontir.Button">
+        <item name="backgroundTint">@color/selector_btn_secondary_bg</item>
+        <item name="android:textColor">@color/secondaryColor</item>
+    </style>
+
+    <style name="Widget.GetMontir.Button.Secondary.Small">
+        <item name="android:textSize">12sp</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+</resources>

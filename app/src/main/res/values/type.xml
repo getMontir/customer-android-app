@@ -15,7 +15,7 @@
 ~ limitations under the License.
 -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!--Typography-->
 
@@ -73,6 +73,7 @@
         <!--Your custom type style here-->
         <item name="fontFamily">@font/dm_sans</item>
         <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:letterSpacing" tools:targetApi="lollipop">0.01</item>
     </style>
 
     <style name="TextAppearance.GetMontir.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
@@ -102,6 +103,7 @@
         <item name="textAllCaps">false</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing" tools:targetApi="lollipop">0.01</item>
     </style>
 
     <style name="TextAppearance.GetMontir.Caption" parent="TextAppearance.MaterialComponents.Caption">
@@ -110,6 +112,10 @@
 
     <style name="TextAppearance.GetMontir.Overline" parent="TextAppearance.MaterialComponents.Overline">
         <!--Your custom type style here-->
+    </style>
+
+    <style name="TextAppearance.GetMontir.Toolbar.Title" parent="TextAppearance.GetMontir.Body2">
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

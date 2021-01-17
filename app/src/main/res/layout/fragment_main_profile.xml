@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.ui.main.ProfileFragment"
-    android:background="@color/grayscale_input_background">
+    android:background="@color/grayscale_input_background"
+    android:theme="@style/Theme.GetMontir.Light">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -14,8 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:menu="@menu/home_toolbar_menu"
-        style="@style/Widget.GetMontir.Toolbar.Light"/>
+        app:menu="@menu/profile_toolbar_menu"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
